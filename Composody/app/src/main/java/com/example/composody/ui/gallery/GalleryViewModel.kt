@@ -1,13 +1,13 @@
-package com.example.composody.ui.faqs
+package com.example.composody.ui.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class FaqsViewModel : ViewModel() {
+class GalleryViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is FAQs Fragment"
+        value = "This is gallery Fragment"
     }
     val text: LiveData<String> = _text
 }

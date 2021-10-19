@@ -1,10 +1,10 @@
-package com.example.composody.ui.about
+package com.example.composody.ui.slideshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class AboutViewModel : ViewModel() {
+class SlideshowViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is slideshow Fragment"

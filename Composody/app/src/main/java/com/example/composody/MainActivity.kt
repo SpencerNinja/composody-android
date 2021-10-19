@@ -15,42 +15,33 @@ import com.example.composody.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // Create app bar variable
     private lateinit var appBarConfiguration: AppBarConfiguration
-
-    // Create data binding variable
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        setContentView(R.layout.activity_main)
-
-        // Assign data binding variable to inflate the layout
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO: What does this do?
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        // Floating Action: email
-//        binding.appBarMain.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-
+        binding.appBarMain.fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Pass each menu ID as a set of IDs because each menu should be considered as top level destinations.
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_faqs, R.id.nav_about
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,5 +54,4 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 }

@@ -6,7 +6,7 @@ import com.karlotoy.perfectune.instance.PerfectTune
 import android.os.CountDownTimer
 import android.view.View
 
-class Working1 : AppCompatActivity() {
+class Mach1 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

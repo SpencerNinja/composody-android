@@ -119,11 +119,11 @@ class HomeFragment : Fragment() {
     /**
      * STOP button
      */
-    fun stopTune(view: View) {
-        if (view.id == R.id.button_sound_stop) {
-            //stops the tune
-//            note.toneObject.stopTune()
-        }
-    }
+//    fun stopTune(view: View) {
+//        if (view.id == R.id.button_sound_stop) {
+//            //stops the tune
+////            note.toneObject.stopTune()
+//        }
+//    }
 
 }

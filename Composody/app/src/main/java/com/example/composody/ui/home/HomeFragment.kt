@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -36,6 +37,13 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+//        // NumberPicker
+//        var data = listOf("2", "3", "4", "5", "6", "7", "8", "9", "10")
+//        var picker = binding.numberPicker
+//        picker.minValue = data[0].toInt()
+//        picker.maxValue = data.size
+//        picker.displayedValues = data.toTypedArray()
 
         createMelody()
 

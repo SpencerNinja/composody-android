@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -59,65 +60,58 @@
         app:layout_constraintStart_toEndOf="@+id/scale_bank"
         app:layout_constraintTop_toTopOf="@+id/scale_bank" />
 
-    <ScrollView
-        android:layout_width="40dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_sound_play"
-        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
+    <NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:background="#FFF"
+        android:layout_marginTop="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scale_picker"
+        app:layout_constraintEnd_toStartOf="@+id/scale_picker"
+        app:layout_constraintHorizontal_bias="0.688"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes_in_melody">
+        app:layout_constraintTop_toBottomOf="@+id/scale_bank"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="190dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes_in_melody"
-        app:layout_constraintVertical_bias="0.09">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
+    <NumberPicker
+        android:id="@+id/scale_picker"
+        android:layout_width="161dp"
+        android:layout_height="180dp"
+        android:background="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/button_sound_play"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/notes_in_melody">
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scale_bank"
+        app:layout_constraintVertical_bias="0.508" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    <NumberPicker
+        android:id="@+id/pattern_picker"
+        android:layout_width="98dp"
+        android:layout_height="180dp"
+        android:background="#FFF"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scale_picker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toEndOf="@+id/scale_picker"
+        app:layout_constraintTop_toBottomOf="@+id/scale_bank"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_sound_play"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="236dp"
         android:onClick="playMelody"
         android:text="Play"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scale_bank"
-        app:layout_constraintVertical_bias="0.913" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="#6A6A6A"
     tools:context=".ui.home.HomeFragment">
 
     <ImageView
@@ -19,13 +19,13 @@
 
     <TextView
         android:id="@+id/notes_in_melody"
-        android:layout_width="80dp"
-        android:layout_height="95dp"
-        android:text="Notes in melody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="normal|italic"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/scale_bank"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,13 +33,13 @@
 
     <TextView
         android:id="@+id/scale_bank"
-        android:layout_width="120dp"
-        android:layout_height="95dp"
-        android:text="Scale to pull notes from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scales"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="normal|italic"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -48,55 +48,75 @@
 
     <TextView
         android:id="@+id/note_pattern"
-        android:layout_width="80dp"
-        android:layout_height="95dp"
-        android:text="Select main note pattern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mood"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="normal|italic"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toEndOf="@+id/scale_bank"
         app:layout_constraintTop_toTopOf="@+id/scale_bank" />
 
-    <NumberPicker
-        android:id="@+id/number_picker"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/number_cardview"
         android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:background="#FFF"
-        android:layout_marginTop="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scale_picker"
-        app:layout_constraintEnd_toStartOf="@+id/scale_picker"
-        app:layout_constraintHorizontal_bias="0.688"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#B2FFFFFF"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_play"
+        app:layout_constraintEnd_toStartOf="@+id/scale_cardview"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scale_bank"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/notes_in_melody">
 
-    <NumberPicker
-        android:id="@+id/scale_picker"
-        android:layout_width="161dp"
-        android:layout_height="180dp"
-        android:background="#FFF"
+        <NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="120dp"
+            android:layout_height="190dp"
+            android:background="#00FFFFFF" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/scale_cardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#B3FFFFFF"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_sound_play"
+        app:layout_constraintEnd_toStartOf="@+id/pattern_cardview"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/number_cardview"
+        app:layout_constraintTop_toBottomOf="@+id/notes_in_melody">
+
+        <NumberPicker
+            android:id="@+id/scale_picker"
+            android:layout_width="120dp"
+            android:layout_height="190dp"
+            android:background="#00FFFFFF" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pattern_cardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#B3FFFFFF"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toTopOf="@+id/button_sound_play"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.424"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scale_bank"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/scale_cardview"
+        app:layout_constraintTop_toBottomOf="@+id/notes_in_melody"
+        app:layout_constraintVertical_bias="0.466">
 
-    <NumberPicker
-        android:id="@+id/pattern_picker"
-        android:layout_width="98dp"
-        android:layout_height="180dp"
-        android:background="#FFF"
-        android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scale_picker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
-        app:layout_constraintStart_toEndOf="@+id/scale_picker"
-        app:layout_constraintTop_toBottomOf="@+id/scale_bank"
-        app:layout_constraintVertical_bias="1.0" />
+        <NumberPicker
+            android:id="@+id/pattern_picker"
+            android:layout_width="120dp"
+            android:layout_height="190dp"
+            android:background="#00FFFFFF" />
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button_sound_play"
@@ -104,7 +124,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="236dp"
         android:onClick="playMelody"
-        android:text="Play"
+        android:text="Generate"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

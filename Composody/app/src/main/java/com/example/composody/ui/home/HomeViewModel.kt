@@ -67,7 +67,7 @@ class HomeViewModel : ViewModel() {
      */
     fun playMelody(view: View) {
         var index = 0
-        if (view.id == R.id.button_sound_play) {
+        if (view.id == R.id.button_generate_melody) {
             object: CountDownTimer((melodyLength*1000).toLong(), 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     Log.i("note", "note frequency: ${notes[index].frequency}")

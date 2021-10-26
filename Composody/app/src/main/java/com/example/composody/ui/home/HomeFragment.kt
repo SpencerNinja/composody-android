@@ -1,35 +1,21 @@
 package com.example.composody.ui.home
 
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.composody.Note
 import com.example.composody.R
-import com.example.composody.Scale
 import com.example.composody.databinding.FragmentHomeBinding
-import com.karlotoy.perfectune.instance.PerfectTune
-import kotlin.random.Random
 
 class HomeFragment : Fragment() {
-
-    // How many notes
-    var melodyLength = 7
-    // Create an empty list to later store notes
-    var notes = mutableListOf<Note>()
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -38,25 +24,39 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-//        // NumberPicker
-//        var data = listOf("2", "3", "4", "5", "6", "7", "8", "9", "10")
-//        var picker = binding.numberPicker
-//        picker.minValue = data[0].toInt()
-//        picker.maxValue = data.size
-//        picker.displayedValues = data.toTypedArray()
-
-        createMelody()
-
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        // Inflate view
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // OnClickListener for "Generate" melody button
+        root.findViewById<Button>(R.id.button_generate_melody).setOnClickListener {
+            // Create the melody
+            homeViewModel.createMelody()
+        }
+
+        // Notes (How many notes?) NumberPicker
+        var noteCount = listOf("3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
+        var notePicker = binding.numberPicker
+        notePicker.minValue = noteCount[0].toInt()
+        notePicker.maxValue = noteCount.size
+        notePicker.displayedValues = noteCount.toTypedArray()
+
+        // Scale (What scale to pull notes from?) NumberPicker
+        var data2 = listOf("3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
+        var picker2 = binding.numberPicker
+        picker2.minValue = data2[0].toInt()
+        picker2.maxValue = data2.size
+        picker2.displayedValues = data2.toTypedArray()
+
+        // Display text depending on current page
 //        val textView: TextView = binding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+
         return root
     }
 
@@ -64,74 +64,5 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    fun createMelody(): List<Note> {
-
-        // Choose a random scale from the list of scales
-        var scale = Scale()
-        var selectedScale = scale.selectRandomScale()
-        Log.i("note", "randomFrequencyIndex = ${selectedScale}")
-
-        // create a note with a frequency value and add it to a new list
-        for (n1 in 1..melodyLength) {
-
-            // Initialize a note instance
-            var note = Note()
-            note.toneObject = PerfectTune()
-
-            // Generate a random frequency from the selected scale
-            var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-            var randomFrequency = selectedScale[randomFrequencyIndex]
-            Log.i("note", "randomFrequencyIndex = ${randomFrequencyIndex}")
-            Log.i("note", "randomFrequency = ${randomFrequency}")
-            note.frequency = randomFrequency
-
-            var randomDuration = Random.nextInt(500, 2000)
-            note.duration = randomDuration
-
-            notes.add(note)
-        }
-        return notes
-    }
-
-    fun startCoolDown(note: Note, seconds: Int) {
-        object: CountDownTimer(seconds*1000.toLong(), seconds*1000.toLong()) {
-            override fun onTick(millisUntilFinished: Long) {}
-            override fun onFinish() {
-                note.toneObject.stopTune()
-            }
-        }.start()
-    }
-
-    /**
-     * PLAY button
-     */
-    fun playMelody(view: View) {
-        var index = 0
-        if (view.id == R.id.button_sound_play) {
-            object: CountDownTimer((melodyLength*1000).toLong(), 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    Log.i("note", "note frequency: ${notes[index].frequency}")
-                    notes[index].assignFrequency()
-                    notes[index].playFreq()
-                    startCoolDown(notes[index],1)
-                    index += 1
-                }
-                override fun onFinish() {
-                    return
-                }
-            }.start()
-        }
-    }
-
-    /**
-     * STOP button
-     */
-//    fun stopTune(view: View) {
-//        if (view.id == R.id.button_sound_stop) {
-//            //stops the tune
-////            note.toneObject.stopTune()
-//        }
-//    }
 
 }

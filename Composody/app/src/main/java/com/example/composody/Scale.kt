@@ -21,10 +21,26 @@ class Scale {
     var japanese = listOf(261.6256, 277.1826, 349.2282, 391.9954, 466.1638, 523.2511)
     var random = listOf(207.6523, 220.0000, 233.0819, 246.9417, 261.6256, 277.1826, 293.6648, 311.1270, 293.6648, 349.2282, 369.9944, 391.9954)
 
-    // Create a list of the available scales
+    // Create a list of the available scale frequencies
     var listOfScales = listOf(cMajor, pentatonic, pentatonic2, aMinor, cMajorPentatonic,
         aMinorPentatonic, blues, harmonicMinor, alteredDominant, flamenco, hungarianMinor, persian,
         spanish, japanese, random)
+
+    // Create a dictionary of scale names and frequency values
+    var dictionaryOfScales = mapOf("cMajor" to cMajor, "pentatonic" to pentatonic, "pentatonic2" to pentatonic2,
+        "aMinor" to aMinor, "cMajor Pentatonic" to cMajorPentatonic, "aMinor Pentatonic" to aMinorPentatonic,
+        "Blues" to blues, "Harmonic Minor" to harmonicMinor, "Altered Dominant" to alteredDominant,
+        "Flamenco" to flamenco, "Hungarian Minor" to hungarianMinor, "Persian" to persian, "Spanish" to spanish,
+        "Japanese" to japanese, "All Notes" to random)
+
+    // Create a list of Scale names
+    fun returnListOfScaleNames(): List<String> {
+        var listOfScaleNames = mutableListOf<String>()
+        for ((key, value) in dictionaryOfScales) {
+            listOfScaleNames.add(key)
+        }
+        return listOfScaleNames
+    }
 
     // Choose a random scale from the list of scales
     fun selectRandomScale(): List<Double> {

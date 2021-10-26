@@ -35,6 +35,10 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val application = requireNotNull(this.activity).application
+
+        val viewModelFactory = HomeViewModelFactory(application)
+
         // Notes NumberPicker = How many notes?
         var noteCount = listOf("3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
         var notePicker = binding.numberPicker

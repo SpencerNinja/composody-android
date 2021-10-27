@@ -40,26 +40,11 @@ class HomeFragment : Fragment() {
         val viewModelFactory = HomeViewModelFactory(application)
 
         // Notes NumberPicker = How many notes?
-        var noteCount = listOf("3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
+        var noteCount = homeViewModel.noteCount
         var notePicker = binding.numberPicker
         notePicker.minValue = noteCount[0].toInt()
         notePicker.maxValue = noteCount.size
         notePicker.displayedValues = noteCount.toTypedArray()
-
-        // Scale NumberPicker = What scale to pull notes from?
-        var collectionOfScales = Scale()
-        var scaleBank = collectionOfScales.returnListOfScaleNames()
-        var scalePicker = root.findViewById<NumberPicker>(R.id.scale_picker)
-        scalePicker.minValue = 0
-        scalePicker.maxValue = scaleBank.size - 1
-        scalePicker.displayedValues = scaleBank.toTypedArray()
-
-        // Mood NumberPicker = What patterns to use?
-        var moodBank = listOf("Rocky", "Dangerous", "Soaring", "Rainy Day", "Lullaby")
-        var moodPicker = root.findViewById<NumberPicker>(R.id.pattern_picker)
-        moodPicker.minValue = 0
-        moodPicker.maxValue = moodBank.size - 1
-        moodPicker.displayedValues = moodBank.toTypedArray()
 
         // Store the number picked
         var notePicked = noteCount[0]
@@ -69,17 +54,32 @@ class HomeFragment : Fragment() {
             Log.i("note", "number picked: $notePicked ")
         })
 
+        // Scale NumberPicker = What scale to pull notes from?
+        var collectionOfScales = Scale()
+        var scaleBank = collectionOfScales.returnListOfScaleNames()
+        var scalePicker = root.findViewById<NumberPicker>(R.id.scale_picker)
+        scalePicker.minValue = 0
+        scalePicker.maxValue = scaleBank.size - 1
+        scalePicker.displayedValues = scaleBank.toTypedArray()
+
         // Store the scale picked
         var scalePicked = scaleBank[0]
-        scalePicker.setOnValueChangedListener(OnValueChangeListener { numberPicker, i, i1 ->
+        scalePicker.setOnValueChangedListener(OnValueChangeListener { _, _, _ ->
             val scalePositionPicked: Int = scalePicker.getValue()
             scalePicked = scaleBank[scalePositionPicked]
             Log.i("note", "scale picked: $scalePicked ")
         })
 
+        // Mood NumberPicker = What patterns to use?
+        var moodBank = homeViewModel.moodBank
+        var moodPicker = root.findViewById<NumberPicker>(R.id.pattern_picker)
+        moodPicker.minValue = 0
+        moodPicker.maxValue = moodBank.size - 1
+        moodPicker.displayedValues = moodBank.toTypedArray()
+
         // Store the mood pattern picked
         var moodPicked = moodBank[0]
-        moodPicker.setOnValueChangedListener(OnValueChangeListener { numberPicker, i, i1 ->
+        moodPicker.setOnValueChangedListener(OnValueChangeListener { _, _, _ ->
             val moodPositionPicked: Int = moodPicker.getValue()
             moodPicked = moodBank[moodPositionPicked]
             Log.i("note", "mood pattern picked: $moodPicked ")
@@ -90,12 +90,6 @@ class HomeFragment : Fragment() {
             // Create the melody
             homeViewModel.createMelody()
         }
-
-        // Display text depending on current page
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
 
         return root
     }

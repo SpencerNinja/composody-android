@@ -28,14 +28,35 @@ class HomeViewModel(
     // Data to load into mood/pattern scroll wheel
     var moodBank = listOf("Rocky", "Dangerous", "Soaring", "Rainy Day", "Lullaby")
 
-    // Data Binding
-//    @Bindable
-//    var numberPicker: NumberPicker
+    // Two Way Data Binding
+    // Variables to store user input from scroll wheels
+    var countPicked: Int = 0
+//    set(value: Int) {
+//        field = value
+//        _countPickedLive.value = field
+//    }
+    // Live Data
+    private val _countPickedLive = MutableLiveData<Int?>()
+    val countPickedLive: LiveData<Int?>
+        get() = _countPickedLive
+
+//    var scaledPicked: Int? = null
+//    var moodPicked: Int? = null
+
+    val scaleSelected = mapOf(1 to "cMajor", 2 to "Pentatonic", 3 to "pentatonic2", 4 to "aMinor",
+        5 to "cMajor Pentatonic", 6 to "aMinor Pentatonic", 7 to "Blues", 8 to "Harmonic Minor",
+        9 to "Altered Dominant", 10 to "Flamenco", 11 to "Hungarian Minor", 12 to "Persian",
+        13 to "Spanish", 14 to "Japanese", 15 to "All Notes")
 
     // How many notes
     var melodyLength = 7
+
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
+
+    fun setCountLiveData(count: Int) {
+        _countPickedLive.value = count
+    }
 
     // Generate a random melody
     fun createMelody(): List<Note> {
@@ -61,7 +82,7 @@ class HomeViewModel(
         return notes
     }
 
-    //
+    // TODO: What does this do?
     fun startCoolDown(note: Note, seconds: Int) {
         object: CountDownTimer(seconds*1000.toLong(), seconds*1000.toLong()) {
             override fun onTick(millisUntilFinished: Long) {}
@@ -75,7 +96,7 @@ class HomeViewModel(
     fun playMelody(view: View) {
         var index = 0
         if (view.id == R.id.button_generate_melody) {
-            object: CountDownTimer((melodyLength*1000).toLong(), 1000) {
+            object: CountDownTimer((melodyLength.times(1000)).toLong(), 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     Log.i("note", "note frequency: ${notes[index].frequency}")
                     notes[index].assignFrequency()
@@ -100,11 +121,9 @@ class HomeViewModel(
 
     // Necessary for Data Binding
     private val callbacks: PropertyChangeRegistry by lazy { PropertyChangeRegistry()}
-
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
         callbacks.add(callback)
     }
-
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
         callbacks.remove(callback)
     }

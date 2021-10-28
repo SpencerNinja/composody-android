@@ -21,7 +21,8 @@ class HomeViewModel(
      * Melody Length scroll wheel
      */
     // Data to load into melody note count scroll wheel
-    var noteCount = listOf("3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
+    var noteCount = listOf("3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+        "16", "17", "18", "19", "20", "21")
 
     // Live Data for melody note count
     private val _countPickedLive = MutableLiveData<Int>()
@@ -71,7 +72,7 @@ class HomeViewModel(
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
 
-    fun generateRandomNote(selectedScale: List<Double>) {
+    private fun generateRandomNote(selectedScale: List<Double>) {
         // Initialize a note instance
         var note = Note()
         note.toneObject = PerfectTune()
@@ -89,9 +90,8 @@ class HomeViewModel(
     // Generate a random melody
     // TODO: Break this into multiple functions
     fun createMelody(): List<Note> {
-        // Initialize melodyLength to default value on scrollwheel
+        // Initialize melody and scale to default value on scrollwheel
         var melodyLength = 3
-        // Initialize selectedScale to default value on scrollwheel
         var scale = Scale()
         var selectedScale = scale.listOfScales[0]
         // Check if melody length is null
@@ -108,12 +108,17 @@ class HomeViewModel(
         // Set melody length to value from scroll wheel (live data)
         melodyLength = _countPickedLive.value!!
         Log.i("note", "melody length = $melodyLength")
+        // Check if scale is null
+        if (_scalePickedLive.value == null) {
+            for (n1 in 1..melodyLength!!) {
+                generateRandomNote(selectedScale)
+            }
+            return notes
+        }
         // Set scale to value from scroll wheel (live data)
         selectedScale = scale.returnSelectedScale(scalePickedLive.value!!)
-        Log.i("note", "createMelody        - scale frequencies = $selectedScale")
-        // Create a note with a frequency value and add it to the melody note list
+        Log.i("note", "createMelod - scale frequencies = $selectedScale")
         for (n1 in 1..melodyLength!!) {
-            // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
             generateRandomNote(selectedScale)
         }
         // Return the melody (a list of note frequencies)

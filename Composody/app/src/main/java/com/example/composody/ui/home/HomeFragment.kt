@@ -52,12 +52,12 @@ class HomeFragment : Fragment() {
         var noteCount = homeViewModel.noteCount
         var notePicker = binding.numberPicker
         notePicker.minValue = noteCount[0].toInt()
-        notePicker.maxValue = noteCount.size
+        notePicker.maxValue = noteCount.size + 2
         notePicker.displayedValues = noteCount.toTypedArray()
 
         // Observer for Live Data
         homeViewModel.countPickedLive.observe(viewLifecycleOwner, Observer { count ->
-            Log.i("note", "inside Observer: $count")
+            Log.i("note", "inside Observer = $count")
         })
 
         // Store the melody length number selected from the scroll wheel

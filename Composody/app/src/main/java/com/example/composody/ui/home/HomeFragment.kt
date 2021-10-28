@@ -57,13 +57,12 @@ class HomeFragment : Fragment() {
 
 
         // Store the melody length number selected from the scroll wheel
-        var notePicked = homeViewModel.countPicked
-        Log.i("note", "before listener: $notePicked")
         notePicker.setOnValueChangedListener(OnValueChangeListener { numberPicker, i, i1 ->
             val numPositionPicked: Int = notePicker.getValue()
             homeViewModel.setCountLiveData(numPositionPicked)
-            Log.i("note", "inside listener: $numPositionPicked")
+            Log.i("note", "inside listener - countPickedLive: ${homeViewModel.countPickedLive.value}")
         })
+
 
         //  Load the scale names into the NumberPicker scroll wheel
         var collectionOfScales = Scale()
@@ -93,7 +92,7 @@ class HomeFragment : Fragment() {
         moodPicker.setOnValueChangedListener(OnValueChangeListener { _, _, _ ->
             val moodPositionPicked: Int = moodPicker.getValue()
             moodPicked = moodBank[moodPositionPicked]
-            Log.i("note", "mood pattern picked: $moodPicked ")
+            Log.i("note", "mood pattern picked: $moodPicked")
         })
 
         // OnClickListener for "Generate" melody button

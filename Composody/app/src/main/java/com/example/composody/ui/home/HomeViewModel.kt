@@ -1,58 +1,135 @@
 package com.example.composody.ui.home
 
+import android.app.Application
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.databinding.Observable
+import androidx.databinding.PropertyChangeRegistry
+import androidx.lifecycle.*
 import com.example.composody.Note
 import com.example.composody.R
 import com.example.composody.Scale
 import com.karlotoy.perfectune.instance.PerfectTune
 import kotlin.random.Random
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    application: Application
+) : AndroidViewModel(application), Observable {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "HOME"
+    /**
+     * Melody Length scroll wheel
+     */
+    // Data to load into melody note count scroll wheel
+    var noteCount = listOf("3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+        "16", "17", "18", "19", "20", "21")
+
+    // Live Data for melody note count
+    private val _countPickedLive = MutableLiveData<Int>()
+    val countPickedLive: LiveData<Int>
+        get() = _countPickedLive
+
+    // Set live data for melody note count picked
+    fun setCountLiveData(count: Int) {
+        _countPickedLive.value = count
     }
-    val text: LiveData<String> = _text
 
-    // How many notes
-    var melodyLength = 7
+
+    /**
+     * Scale scroll wheel
+     */
+    // Live Data for selected scale (position in list)
+    private val _scalePickedLive = MutableLiveData<String>()
+    val scalePickedLive: LiveData<String>
+        get() = _scalePickedLive
+
+    // Set live data for scale picked
+    fun setScaleLiveData(scale: String) {
+        _scalePickedLive.value = scale
+    }
+
+
+    /**
+     * Mood/Pattern scroll wheel
+     */
+    // Data to load into mood/pattern scroll wheel
+    var moodBank = listOf("Rocky", "Dangerous", "Soaring", "Rainy Day", "Lullaby")
+
+    // Mood Live Data
+    private val _moodPickedLive = MutableLiveData<String>()
+    val moodPickedLive: LiveData<String>
+        get() = _moodPickedLive
+
+    // Set live data for scale picked
+    fun setMoodLiveData(mood: String) {
+        _moodPickedLive.value = mood
+    }
+
+
+    /**
+     * Generate a Melody
+     */
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
 
+    private fun generateRandomNote(selectedScale: List<Double>) {
+        // Initialize a note instance
+        var note = Note()
+        note.toneObject = PerfectTune()
+        // Generate a random frequency from the selected scale
+        var randomFrequencyIndex = Random.nextInt(selectedScale.size)
+        var randomFrequency = selectedScale[randomFrequencyIndex]
+        note.frequency = randomFrequency
+        var randomDuration = Random.nextInt(500, 2000)
+        note.duration = randomDuration
+        notes.add(note)
+        Log.i("note", "createMelody - frequency index = $randomFrequencyIndex")
+        Log.i("note", "createMelody - frequency = $randomFrequency")
+    }
+
+    // Generate a random melody
+    // TODO: Break this into multiple functions
     fun createMelody(): List<Note> {
-
-        // Choose a random scale from the list of scales
+        // Initialize melody and scale to default value on scrollwheel
+        var melodyLength = 3
         var scale = Scale()
-        var selectedScale = scale.selectRandomScale()
-        Log.i("note", "randomFrequencyIndex = ${selectedScale}")
-
-        // create a note with a frequency value and add it to a new list
-        for (n1 in 1..melodyLength) {
-
-            // Initialize a note instance
-            var note = Note()
-            note.toneObject = PerfectTune()
-
-            // Generate a random frequency from the selected scale
-            var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-            var randomFrequency = selectedScale[randomFrequencyIndex]
-            Log.i("note", "randomFrequencyIndex = ${randomFrequencyIndex}")
-            Log.i("note", "randomFrequency = ${randomFrequency}")
-            note.frequency = randomFrequency
-
-            var randomDuration = Random.nextInt(500, 2000)
-            note.duration = randomDuration
-
-            notes.add(note)
+        var selectedScale = scale.listOfScales[0]
+        // Check if melody length is null
+        if (_countPickedLive.value == null) {
+            Log.i("note", "melody length = $melodyLength")
+            Log.i("note", "createMelody - scale frequencies = $selectedScale")
+            // Create a note with a frequency value and add it to the melody note list
+            for (n1 in 1..melodyLength!!) {
+                // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
+                generateRandomNote(selectedScale)
+            }
+            return notes
         }
+        // Set melody length to value from scroll wheel (live data)
+        melodyLength = _countPickedLive.value!!
+        Log.i("note", "melody length = $melodyLength")
+        // Check if scale is null
+        if (_scalePickedLive.value == null) {
+            for (n1 in 1..melodyLength!!) {
+                generateRandomNote(selectedScale)
+            }
+            return notes
+        }
+        // Set scale to value from scroll wheel (live data)
+        selectedScale = scale.returnSelectedScale(scalePickedLive.value!!)
+        Log.i("note", "createMelod - scale frequencies = $selectedScale")
+        for (n1 in 1..melodyLength!!) {
+            generateRandomNote(selectedScale)
+        }
+        // Return the melody (a list of note frequencies)
         return notes
     }
 
+
+    /**
+     * Play melody audio
+     */
+    // TODO: What does this do?
     fun startCoolDown(note: Note, seconds: Int) {
         object: CountDownTimer(seconds*1000.toLong(), seconds*1000.toLong()) {
             override fun onTick(millisUntilFinished: Long) {}
@@ -62,15 +139,14 @@ class HomeViewModel : ViewModel() {
         }.start()
     }
 
-    /**
-     * PLAY button
-     */
+    // Start melody playback
     fun playMelody(view: View) {
+        val melodyLength = countPickedLive.value
         var index = 0
         if (view.id == R.id.button_generate_melody) {
-            object: CountDownTimer((melodyLength*1000).toLong(), 1000) {
+            object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    Log.i("note", "note frequency: ${notes[index].frequency}")
+                    Log.i("note", "note frequency = ${notes[index].frequency}")
                     notes[index].assignFrequency()
                     notes[index].playFreq()
                     startCoolDown(notes[index],1)
@@ -83,14 +159,29 @@ class HomeViewModel : ViewModel() {
         }
     }
 
+
     /**
-     * STOP button
+     * Stop melody audio
      */
+    // Stop melody playback
 //    fun stopTune(view: View) {
 //        if (view.id == R.id.button_sound_stop) {
 //            //stops the tune
 ////            note.toneObject.stopTune()
 //        }
 //    }
+
+
+    /**
+     * Data Binding
+     */
+    // Necessary for Data Binding
+    private val callbacks: PropertyChangeRegistry by lazy { PropertyChangeRegistry()}
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+        callbacks.add(callback)
+    }
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+        callbacks.remove(callback)
+    }
 
 }

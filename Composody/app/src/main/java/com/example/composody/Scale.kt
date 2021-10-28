@@ -1,11 +1,13 @@
 package com.example.composody
 
+import android.util.Log
 import kotlin.random.Random
 
 class Scale {
 
     // Create a variable of each scale and the frequencies of the notes in that scale
-    var cMajor = listOf(261.6256, 293.6648, 293.6648, 349.2282, 391.9954, 440.0000, 493.8833, 523.2511)
+    // TODO: Redo so that the range covers an octave plus one note and starts on root note
+    var cMajor = listOf(261.6256, 293.6648, 329.6276, 349.2282, 391.9954, 440.0000, 493.8833, 523.2511)
     var pentatonic = listOf(261.6256, 293.6648, 293.6648, 391.9954, 440.0000)
     var pentatonic2	= listOf(220.0000, 261.6256, 293.6648, 293.6648, 391.9954)
     var aMinor = listOf(220.0000, 246.9417, 261.6256, 293.6648, 293.6648, 349.2282, 391.9954, 440.0000)
@@ -42,12 +44,24 @@ class Scale {
         return listOfScaleNames
     }
 
+    fun returnSelectedScale(scaleName: String): List<Double> {
+        var scaleNoteFrequencies = listOf<Double>()
+        for ((key, value) in dictionaryOfScales) {
+            if (key == scaleName) {
+                scaleNoteFrequencies = value
+                Log.i("note", "returnSelectedScale - selected scale name = $key")
+                Log.i("note", "returnSelectedScale - scale frequencies = $scaleNoteFrequencies")
+            }
+        }
+        return scaleNoteFrequencies
+    }
+
     // Choose a random scale from the list of scales
     fun selectRandomScale(): List<Double> {
         var randomScaleIndex = Random.nextInt(listOfScales.size)
         var randomScale = listOfScales[randomScaleIndex]
-//        Log.i("note", "randomIndex = ${randomScaleIndex}")
-//        Log.i("note", "randomScale = ${randomScale}")
+//        Log.i("note", "randomIndex = $randomScaleIndex")
+//        Log.i("note", "randomScale = $randomScale")
         return randomScale
     }
 

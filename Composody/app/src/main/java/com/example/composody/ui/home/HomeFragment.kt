@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
 
         // Observer for Live Data
         homeViewModel.countPickedLive.observe(viewLifecycleOwner, Observer { count ->
-            Log.i("note", "inside Observer: ${count}")
+//            Log.i("note", "inside Observer: ${count}")
         })
 
 

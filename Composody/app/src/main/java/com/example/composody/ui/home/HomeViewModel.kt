@@ -28,13 +28,9 @@ class HomeViewModel(
     // Data to load into mood/pattern scroll wheel
     var moodBank = listOf("Rocky", "Dangerous", "Soaring", "Rainy Day", "Lullaby")
 
-    // Two Way Data Binding
     // Variables to store user input from scroll wheels
     var countPicked: Int = 0
-//    set(value: Int) {
-//        field = value
-//        _countPickedLive.value = field
-//    }
+
     // Live Data
     private val _countPickedLive = MutableLiveData<Int?>()
     val countPickedLive: LiveData<Int?>
@@ -54,6 +50,7 @@ class HomeViewModel(
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
 
+    // Set live data for melody note count picked
     fun setCountLiveData(count: Int) {
         _countPickedLive.value = count
     }

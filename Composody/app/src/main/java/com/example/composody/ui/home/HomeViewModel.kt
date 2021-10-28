@@ -71,50 +71,52 @@ class HomeViewModel(
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
 
+    fun generateRandomNote(selectedScale: List<Double>) {
+        // Initialize a note instance
+        var note = Note()
+        note.toneObject = PerfectTune()
+        // Generate a random frequency from the selected scale
+        var randomFrequencyIndex = Random.nextInt(selectedScale.size)
+        var randomFrequency = selectedScale[randomFrequencyIndex]
+        note.frequency = randomFrequency
+        var randomDuration = Random.nextInt(500, 2000)
+        note.duration = randomDuration
+        notes.add(note)
+        Log.i("note", "createMelody - frequency index = $randomFrequencyIndex")
+        Log.i("note", "createMelody - frequency = $randomFrequency")
+    }
+
     // Generate a random melody
     // TODO: Break this into multiple functions
     fun createMelody(): List<Note> {
+        // Initialize melodyLength to default value on scrollwheel
         var melodyLength = 3
+        // Initialize selectedScale to default value on scrollwheel
         var scale = Scale()
         var selectedScale = scale.listOfScales[0]
+        // Check if melody length is null
         if (_countPickedLive.value == null) {
             Log.i("note", "melody length = $melodyLength")
             Log.i("note", "createMelody - scale frequencies = $selectedScale")
+            // Create a note with a frequency value and add it to the melody note list
             for (n1 in 1..melodyLength!!) {
-                // Initialize a note instance
-                var note = Note()
-                note.toneObject = PerfectTune()
-                // Generate a random frequency from the selected scale
-                var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-                var randomFrequency = selectedScale[randomFrequencyIndex]
-                Log.i("note", "createMelody - frequency index = $randomFrequencyIndex")
-                Log.i("note", "createMelody - frequency = $randomFrequency")
-                note.frequency = randomFrequency
-                var randomDuration = Random.nextInt(500, 2000)
-                note.duration = randomDuration
-                notes.add(note)
+                // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
+                generateRandomNote(selectedScale)
             }
             return notes
         }
+        // Set melody length to value from scroll wheel (live data)
         melodyLength = _countPickedLive.value!!
         Log.i("note", "melody length = $melodyLength")
+        // Set scale to value from scroll wheel (live data)
         selectedScale = scale.returnSelectedScale(scalePickedLive.value!!)
         Log.i("note", "createMelody        - scale frequencies = $selectedScale")
-        // create a note with a frequency value and add it to a new list
+        // Create a note with a frequency value and add it to the melody note list
         for (n1 in 1..melodyLength!!) {
-            // Initialize a note instance
-            var note = Note()
-            note.toneObject = PerfectTune()
-            // Generate a random frequency from the selected scale
-            var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-            var randomFrequency = selectedScale[randomFrequencyIndex]
-            Log.i("note", "createMelody - frequency index = $randomFrequencyIndex")
-            Log.i("note", "createMelody - frequency = $randomFrequency")
-            note.frequency = randomFrequency
-            var randomDuration = Random.nextInt(500, 2000)
-            note.duration = randomDuration
-            notes.add(note)
+            // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
+            generateRandomNote(selectedScale)
         }
+        // Return the melody (a list of note frequencies)
         return notes
     }
 

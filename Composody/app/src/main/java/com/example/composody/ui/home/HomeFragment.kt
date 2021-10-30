@@ -128,6 +128,13 @@ class HomeFragment : Fragment() {
             homeViewModel.createMelody()
         }
 
+
+        /**
+         * Button to play generated melody
+         */
+        homeViewModel.playMelody(root)
+
+
         return root
     }
 

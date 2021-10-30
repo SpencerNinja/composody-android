@@ -81,6 +81,7 @@ class Scale {
         return listOfScaleNames
     }
 
+    // Return the user selected scale
     fun returnSelectedScale(scaleName: String): List<Double> {
         var scaleNoteFrequencies = listOf<Double>()
         for ((key, value) in dictionaryOfScales) {

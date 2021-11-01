@@ -69,8 +69,25 @@ class HomeViewModel(
     /**
      * Generate a Melody
      */
+    // Display generated melody Live Data
+    private var _displayedMelody = MutableLiveData<List<String>>()
+    val displayedMelody: LiveData<List<String>>
+        get() = _displayedMelody
+
+    // Set live data for scale picked
+    fun setDisplayedGeneratedMelodyLiveData(displayedMelody: List<String>) {
+        _displayedMelody.value = displayedMelody
+    }
+
+    fun convertMelodyListToString(displayedMelody: List<String>): String {
+        var stringMelodyToDisplay: String
+        stringMelodyToDisplay = displayedMelody.toString()
+        return stringMelodyToDisplay
+    }
+
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
+    var displayNotes = mutableListOf<String>()
 
     private fun generateRandomNote(selectedScale: List<Double>) {
         // Initialize a note instance
@@ -83,6 +100,7 @@ class HomeViewModel(
         var randomDuration = Random.nextInt(500, 2000)
         note.duration = randomDuration
         notes.add(note)
+        displayNotes.add(randomFrequency.toString())
         Log.i("note", "createMelody - frequency index = $randomFrequencyIndex")
         Log.i("note", "createMelody - frequency = $randomFrequency")
     }

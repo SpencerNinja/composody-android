@@ -21,14 +21,16 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="333dp"
-            android:layout_height="216dp"
+            android:layout_width="254dp"
+            android:layout_height="164dp"
             android:contentDescription="@string/composody_logo"
-            android:src="@drawable/noout_triangles"
-            app:layout_constraintBottom_toTopOf="@+id/scale_bank"
+            android:src="@drawable/nout_subtitle"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.088" />
 
         <TextView
             android:id="@+id/notes_in_melody"
@@ -39,10 +41,12 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/scale_bank"
-            app:layout_constraintHorizontal_bias="0.393"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/scale_bank" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.073" />
 
         <TextView
             android:id="@+id/scale_bank"
@@ -53,11 +57,12 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/notes_in_melody"
+            app:layout_constraintEnd_toStartOf="@+id/note_pattern"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/notes_in_melody"
+            app:layout_constraintTop_toTopOf="@+id/notes_in_melody"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/note_pattern"
@@ -68,8 +73,9 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/scale_bank"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.546"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/scale_bank"
             app:layout_constraintTop_toTopOf="@+id/scale_bank" />
 
@@ -79,7 +85,6 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="#B2FFFFFF"
             app:cardCornerRadius="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/button_generate_melody"
             app:layout_constraintEnd_toStartOf="@+id/scale_cardview"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,11 +103,11 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="#B3FFFFFF"
             app:cardCornerRadius="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/button_generate_melody"
+            app:layout_constraintBottom_toBottomOf="@+id/number_cardview"
             app:layout_constraintEnd_toStartOf="@+id/pattern_cardview"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/number_cardview"
-            app:layout_constraintTop_toBottomOf="@+id/notes_in_melody">
+            app:layout_constraintTop_toTopOf="@+id/number_cardview">
 
             <NumberPicker
                 android:id="@+id/scale_picker"
@@ -117,12 +122,11 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="#B3FFFFFF"
             app:cardCornerRadius="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/button_generate_melody"
+            app:layout_constraintBottom_toBottomOf="@+id/scale_cardview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/scale_cardview"
-            app:layout_constraintTop_toBottomOf="@+id/notes_in_melody"
-            app:layout_constraintVertical_bias="0.466">
+            app:layout_constraintTop_toTopOf="@+id/scale_cardview">
 
             <NumberPicker
                 android:id="@+id/pattern_picker"
@@ -135,28 +139,55 @@
             android:id="@+id/button_generate_melody"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:layout_marginTop="236dp"
+            android:layout_marginBottom="160dp"
             android:text="@string/generateButton"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_play_melody"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scale_bank"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/number_cardview"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="NotSibling" />
 
         <Button
             android:id="@+id/button_play_melody"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="236dp"
+            android:layout_height="wrap_content"
             android:text="Play Melody"
-            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/button_generate_melody"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_generate_melody"
+            app:layout_constraintTop_toTopOf="@+id/button_generate_melody" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_generated"
+            android:layout_width="409dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.794"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scale_bank"
-            app:layout_constraintVertical_bias="0.014" />
+            app:layout_constraintTop_toBottomOf="@+id/button_generate_melody"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/generated_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Generated Melody:" />
+
+            <TextView
+                android:id="@+id/generated_list"
+                android:layout_width="match_parent"
+                android:layout_height="98dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="The generated melody will output here!"
+                app:layout_constraintTop_toBottomOf="@+id/generated_subtitle" />
+        </androidx.cardview.widget.CardView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

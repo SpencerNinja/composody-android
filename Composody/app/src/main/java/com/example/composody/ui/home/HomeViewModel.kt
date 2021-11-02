@@ -155,10 +155,12 @@ class HomeViewModel(
     fun playMelody(view: View) {
         val melodyLength = countPickedLive.value
         var index = 0
+        Log.i("note", "playMelody - view = $view")
+        Log.i("note", "playMelody - melodyLength = $melodyLength")
         if (view.id == R.id.button_play_melody) {
             object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    Log.i("note", "note frequency = ${notes[index].frequency}")
+                    Log.i("note", "playMelody - note frequency = ${notes[index].frequency}")
                     notes[index].assignFrequency()
                     notes[index].playFreq()
                     startCoolDown(notes[index],1)

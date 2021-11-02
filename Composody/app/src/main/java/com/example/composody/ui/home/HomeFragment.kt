@@ -152,7 +152,11 @@ class HomeFragment : Fragment() {
         /**
          * Button to play generated melody
          */
-        homeViewModel.playMelody(root)
+        root.findViewById<Button>(R.id.button_play_melody).setOnClickListener {
+            homeViewModel.playMelody(root)
+            Log.i("note", "play button clicked")
+        }
+
 
 
         return root

@@ -71,22 +71,24 @@ class HomeViewModel(
      */
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
+    // Live Data for generate melody to display
     private val _displayNotes = MutableLiveData<List<Note>>()
     val displayNotes: LiveData<List<Note>>
         get() = _displayNotes
-//    val translatedNotes: LiveData<String> =
-//        Transformations.map(displayNotes) {
-//            it.toString()
-//        }
 
     private fun generateRandomNote(selectedScale: List<Double>) {
         // Initialize a note instance
         var note = Note()
         note.toneObject = PerfectTune()
-        // Generate a random frequency from the selected scale
-        var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-        var randomFrequency = selectedScale[randomFrequencyIndex]
-        note.frequency = randomFrequency
+//        // Generate a random frequency from the selected scale
+//        Log.i("note", "generateRandomNote - selectedScale = ${selectedScale.size}")
+        if (selectedScale == null) {
+            selectedScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
+        } else {
+            var randomFrequencyIndex = Random.nextInt(selectedScale.size)
+            var randomFrequency = selectedScale[randomFrequencyIndex]
+            note.frequency = randomFrequency
+        }
         var randomDuration = Random.nextInt(500, 2000)
         note.duration = randomDuration
         notes.add(note)
@@ -96,12 +98,15 @@ class HomeViewModel(
 
     // Generate a random melody
     fun createMelody() {
+        // Clear out previous generated melody
+        _displayNotes.value = listOf<Note>()
         // Initialize melody and scale to default values on scrollwheel
         var melodyLength = 3
         var scale = Scale()
         var selectedScale = scale.listOfScales[0]
         // Check if melody length is null
         if (_countPickedLive.value == null) {
+            _countPickedLive.value = 3
             Log.i("note", "createMelody - _countPickedLive.value is null = ${_countPickedLive.value}")
         }
         // Set melody length to value from scroll wheel (live data)
@@ -109,6 +114,7 @@ class HomeViewModel(
         Log.i("note", "createMelody - melody length = $melodyLength")
         // Check if scale is null
         if (_scalePickedLive.value == null) {
+            _scalePickedLive.value = scale.listOfScales[0].toString()
             Log.i("note", "createMelody - _scalePickedLive.value is null = ${_scalePickedLive.value}")
         }
         // Set scale to value from scroll wheel (live data)

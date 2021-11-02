@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.NumberPicker.OnValueChangeListener
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.composody.Note
 import com.example.composody.R
 import com.example.composody.Scale
 import com.example.composody.databinding.FragmentHomeBinding
-import com.example.composody.ui.NoteFrequency
+import com.example.composody.utils.NoteFrequency
 
 class HomeFragment : Fragment() {
 

@@ -39,8 +39,8 @@ class HomeViewModel(
      * Scale scroll wheel
      */
     // Live Data for selected scale (position in list)
-    private val _scalePickedLive = MutableLiveData<String>()
-    val scalePickedLive: LiveData<String>
+    private val _scalePickedLive = MutableLiveData<String?>()
+    val scalePickedLive: LiveData<String?>
         get() = _scalePickedLive
 
     // Set live data for scale picked
@@ -71,6 +71,13 @@ class HomeViewModel(
      */
     // Create an empty list to later store notes
     var notes = mutableListOf<Note>()
+    private val _displayNotes = MutableLiveData<List<Note>>()
+    val displayNotes: LiveData<List<Note>>
+        get() = _displayNotes
+//    val translatedNotes: LiveData<String> =
+//        Transformations.map(displayNotes) {
+//            it.toString()
+//        }
 
     private fun generateRandomNote(selectedScale: List<Double>) {
         // Initialize a note instance
@@ -88,41 +95,35 @@ class HomeViewModel(
     }
 
     // Generate a random melody
-    // TODO: Break this into multiple functions
-    fun createMelody(): List<Note> {
-        // Initialize melody and scale to default value on scrollwheel
+    fun createMelody() {
+        // Initialize melody and scale to default values on scrollwheel
         var melodyLength = 3
         var scale = Scale()
         var selectedScale = scale.listOfScales[0]
         // Check if melody length is null
         if (_countPickedLive.value == null) {
-            Log.i("note", "melody length = $melodyLength")
-            Log.i("note", "createMelody - scale frequencies = $selectedScale")
-            // Create a note with a frequency value and add it to the melody note list
-            for (n1 in 1..melodyLength!!) {
-                // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
-                generateRandomNote(selectedScale)
-            }
-            return notes
+            Log.i("note", "createMelody - _countPickedLive.value is null = ${_countPickedLive.value}")
         }
         // Set melody length to value from scroll wheel (live data)
         melodyLength = _countPickedLive.value!!
-        Log.i("note", "melody length = $melodyLength")
+        Log.i("note", "createMelody - melody length = $melodyLength")
         // Check if scale is null
         if (_scalePickedLive.value == null) {
-            for (n1 in 1..melodyLength!!) {
-                generateRandomNote(selectedScale)
-            }
-            return notes
+            Log.i("note", "createMelody - _scalePickedLive.value is null = ${_scalePickedLive.value}")
         }
         // Set scale to value from scroll wheel (live data)
-        selectedScale = scale.returnSelectedScale(scalePickedLive.value!!)
-        Log.i("note", "createMelod - scale frequencies = $selectedScale")
+        selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
+        Log.i("note", "createMelody - scale frequencies = $selectedScale")
+        // Create a note with a frequency value and add it to the melody note list
         for (n1 in 1..melodyLength!!) {
+            // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
             generateRandomNote(selectedScale)
         }
-        // Return the melody (a list of note frequencies)
-        return notes
+        // Update the melody (a list of note frequencies)
+        Log.i("note", "createMelody - notes = $notes")
+        _displayNotes.value = notes
+        Log.i("note", "createMelody - _displayNotes = ${_displayNotes.value}")
+//        return notes
     }
 
 
@@ -143,7 +144,7 @@ class HomeViewModel(
     fun playMelody(view: View) {
         val melodyLength = countPickedLive.value
         var index = 0
-        if (view.id == R.id.button_generate_melody) {
+        if (view.id == R.id.button_play_melody) {
             object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     Log.i("note", "note frequency = ${notes[index].frequency}")

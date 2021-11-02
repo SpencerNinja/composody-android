@@ -15,4 +15,6 @@
     <string name="mood">Mood</string>
     <string name="generateButton">Generate</string>
     <string name="composody_logo">Composody logo</string>
+    <string name="melody_placeholder">The generated melody will output here!</string>
+    <string name="melody_subtitle">Generated Melody:</string>
 </resources>

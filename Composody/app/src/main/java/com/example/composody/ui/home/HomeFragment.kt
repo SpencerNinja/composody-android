@@ -128,7 +128,7 @@ class HomeFragment : Fragment() {
             // Create the melody
             homeViewModel.createMelody()
             // TODO: update TextView to show generated melody
-//            R.id.generated_list = homeViewModel.setDisplayedGeneratedMelodyLiveData(homeViewModel.displayNotes)
+            R.id.generated_list = homeViewModel.setDisplayedGeneratedMelodyLiveData(homeViewModel.displayNotes)
         }
 
 

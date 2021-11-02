@@ -89,6 +89,10 @@ class HomeViewModel(
     var notes = mutableListOf<Note>()
     var displayNotes = mutableListOf<String>()
 
+    fun updateMelodyDisplay() {
+        displayNotes = createMelody().toString()
+    }
+
     private fun generateRandomNote(selectedScale: List<Double>) {
         // Initialize a note instance
         var note = Note()

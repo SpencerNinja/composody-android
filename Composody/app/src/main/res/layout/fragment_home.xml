@@ -184,7 +184,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="98dp"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@string/melody_placeholder"
                 app:layout_constraintTop_toBottomOf="@+id/generated_subtitle" />
         </androidx.cardview.widget.CardView>
 

@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.composody.Note
 import com.example.composody.R
 import com.example.composody.Scale
 import com.example.composody.databinding.FragmentHomeBinding
@@ -45,6 +47,9 @@ class HomeFragment : Fragment() {
 
         val viewModelFactory = HomeViewModelFactory(application)
 
+        val notePlaceholder = Note()
+        var generatedMelody: List<Note> = listOf(notePlaceholder)
+
 
         /**
          * Melody Length scroll wheel
@@ -58,14 +63,14 @@ class HomeFragment : Fragment() {
 
         // Observer for Live Data
         homeViewModel.countPickedLive.observe(viewLifecycleOwner, Observer { count ->
-            Log.i("note", "inside Observer = $count")
+            Log.i("note", "inside Observer - countPickedLive = $count")
         })
 
         // Store the melody length number selected from the scroll wheel
         notePicker.setOnValueChangedListener(OnValueChangeListener { numberPicker, i, i1 ->
             val numPositionPicked: Int = notePicker.getValue()
             homeViewModel.setCountLiveData(numPositionPicked)
-            Log.i("note", "inside listener - countPickedLive = ${homeViewModel.countPickedLive.value}")
+            Log.i("note", "inside Listener - countPickedLive = ${homeViewModel.countPickedLive.value}")
         })
 
 
@@ -82,7 +87,7 @@ class HomeFragment : Fragment() {
 
         // Observer for Live Data
         homeViewModel.scalePickedLive.observe(viewLifecycleOwner, Observer { scale ->
-//            Log.i("note", "inside Observer: $scale")
+            Log.i("note", "inside Observer - scalePickedLive = $scale")
         })
 
         // Store the selected scale from the scroll wheel
@@ -91,7 +96,7 @@ class HomeFragment : Fragment() {
             val scalePositionPicked: Int = scalePicker.getValue()
             scalePicked = scaleBank[scalePositionPicked]
             homeViewModel.setScaleLiveData(scalePicked)
-            Log.i("note", "scale picked = ${homeViewModel.scalePickedLive.value}")
+            Log.i("note", "inside Listener - scalePickedLive = ${homeViewModel.scalePickedLive.value}")
         })
 
 
@@ -107,7 +112,7 @@ class HomeFragment : Fragment() {
 
         // Observer for Live Data
         homeViewModel.moodPickedLive.observe(viewLifecycleOwner, Observer { mood ->
-//            Log.i("note", "inside Observer: $mood")
+            Log.i("note", "inside Observer - moodPickedLive = $mood")
         })
 
         // Store the mood pattern selected from the scroll wheel
@@ -116,7 +121,7 @@ class HomeFragment : Fragment() {
             val moodPositionPicked: Int = moodPicker.getValue()
             moodPicked = moodBank[moodPositionPicked]
             homeViewModel.setMoodLiveData(moodPicked)
-            Log.i("note", "mood pattern picked = ${homeViewModel.moodPickedLive.value}")
+            Log.i("note", "inside Listener - moodPickedLive = ${homeViewModel.moodPickedLive.value}")
         })
 
 
@@ -127,9 +132,20 @@ class HomeFragment : Fragment() {
         root.findViewById<Button>(R.id.button_generate_melody).setOnClickListener {
             // Create the melody
             homeViewModel.createMelody()
-            // TODO: update TextView to show generated melody
-            R.id.generated_list = homeViewModel.setDisplayedGeneratedMelodyLiveData(homeViewModel.displayNotes)
+            Log.i("note", "inside 'Generate Melody' button Listener - createMelody = ${homeViewModel.displayNotes}")
         }
+
+
+        /**
+         * Observer for generated melody
+         */
+        // Observe
+        homeViewModel.displayNotes.observe(viewLifecycleOwner, Observer {
+            it?.let { melody ->
+                Log.i("note", "inside Observer - melody = $melody")
+                binding.generatedList.text = melody.toString()
+            }
+        })
 
 
         /**

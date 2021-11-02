@@ -17,6 +17,7 @@ import com.example.composody.Note
 import com.example.composody.R
 import com.example.composody.Scale
 import com.example.composody.databinding.FragmentHomeBinding
+import com.example.composody.ui.NoteFrequency
 
 class HomeFragment : Fragment() {
 
@@ -143,7 +144,9 @@ class HomeFragment : Fragment() {
         homeViewModel.displayNotes.observe(viewLifecycleOwner, Observer {
             it?.let { melody ->
                 Log.i("note", "inside Observer - melody = $melody")
-                binding.generatedList.text = melody.toString()
+                binding.generatedList.text = melody.map {
+                    NoteFrequency.mapOfNoteFrequencies[it.frequency]
+                }.toString()
             }
         })
 

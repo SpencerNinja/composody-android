@@ -130,7 +130,7 @@ class HomeFragment : Fragment() {
         // OnClickListener for "Generate" melody button
         root.findViewById<Button>(R.id.button_generate_melody).setOnClickListener {
             // Create the melody
-            homeViewModel.createMelody()
+            homeViewModel.createMelody(binding.generatedList)
             Log.i("note", "inside 'Generate Melody' button Listener - createMelody = ${homeViewModel.displayNotes}")
         }
 

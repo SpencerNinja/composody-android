@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.*
@@ -80,15 +81,10 @@ class HomeViewModel(
         // Initialize a note instance
         var note = Note()
         note.toneObject = PerfectTune()
-//        // Generate a random frequency from the selected scale
-//        Log.i("note", "generateRandomNote - selectedScale = ${selectedScale.size}")
-        if (selectedScale == null) {
-            selectedScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
-        } else {
-            var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-            var randomFrequency = selectedScale[randomFrequencyIndex]
-            note.frequency = randomFrequency
-        }
+        // Generate a random frequency from the selected scale
+        var randomFrequencyIndex = Random.nextInt(selectedScale.size)
+        var randomFrequency = selectedScale[randomFrequencyIndex]
+        note.frequency = randomFrequency
         var randomDuration = Random.nextInt(500, 2000)
         note.duration = randomDuration
         notes.add(note)
@@ -97,9 +93,11 @@ class HomeViewModel(
     }
 
     // Generate a random melody
-    fun createMelody() {
-        // Clear out previous generated melody
-        _displayNotes.value = listOf<Note>()
+    fun createMelody(generatedList: TextView) {
+        if (generatedList.text != "") {
+            _displayNotes.value = listOf()
+            notes = mutableListOf()
+        }
         // Initialize melody and scale to default values on scrollwheel
         var melodyLength = 3
         var scale = Scale()
@@ -120,10 +118,17 @@ class HomeViewModel(
         // Set scale to value from scroll wheel (live data)
         selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         Log.i("note", "createMelody - scale frequencies = $selectedScale")
-        // Create a note with a frequency value and add it to the melody note list
-        for (n1 in 1..melodyLength!!) {
-            // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
-            generateRandomNote(selectedScale)
+        if (selectedScale.isNullOrEmpty()) {
+            val defaultScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
+            for (n1 in 1..melodyLength!!) {
+                generateRandomNote(defaultScale)
+            }
+        } else {
+            // Create a note with a frequency value and add it to the melody note list
+            for (n1 in 1..melodyLength!!) {
+                // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
+                generateRandomNote(selectedScale)
+            }
         }
         // Update the melody (a list of note frequencies)
         Log.i("note", "createMelody - notes = $notes")

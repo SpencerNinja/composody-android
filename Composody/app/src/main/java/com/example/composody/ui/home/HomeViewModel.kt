@@ -84,21 +84,22 @@ class HomeViewModel(
         return note
     }
 
-    // get randomFrequency from the selected scale (in the future it will apply pattern)
+    // Get randomFrequency from the selected scale
+    // TODO: in the future, this will apply pattern
     private fun getRandomFrequency(selectedScale: List<Double>): Double {
         var randomFrequencyIndex = Random.nextInt(selectedScale.size)
         var randomFrequency = selectedScale[randomFrequencyIndex]
         return randomFrequency
     }
 
-    // assign frequency and duration to Note object
+    // Assign frequency and duration to Note object
     private fun assignFrequencyAndDuration(note: Note, randomFrequency: Double) {
         note.frequency = randomFrequency
         var randomDuration = Random.nextInt(500, 2000)
         note.duration = randomDuration
     }
 
-    // add Note object to list of notes (melody)
+    // Add the Note object to list of notes (melody)
     private fun addNoteToMelodyList(selectedScale: List<Double>) {
         var note = createNoteInstance()
         var scale = Scale()
@@ -119,31 +120,36 @@ class HomeViewModel(
 //        Log.i("note", "createMelody - frequency index = $randomFrequencyIndex")
 //        Log.i("note", "createMelody - frequency = $randomFrequency")
 //    }
-    
-    // Generate a random melody
-    fun generateMelody(generatedList: TextView) {
-        // TODO: function to clear out displayed melody TextView if generate button clicked
+
+    private fun clearOutPreviouslyGeneratedMelody(generatedList: TextView) {
         if (generatedList.text != "") {
             _displayNotes.value = listOf()
             notes = mutableListOf()
         }
-        // TODO: function to check if melody length is null
+    }
+
+    private fun checkIfMelodyLengthIsNull() {
         if (_countPickedLive.value == null) {
             _countPickedLive.value = 3
-            Log.i("note", "createMelody - _countPickedLive.value is null = ${_countPickedLive.value}")
         }
-        // TODO: function to initialize a scale to default values on scrollwheel
-        var scale = Scale()
-        var selectedScale = scale.listOfScales[0]
-        // TODO: function to check if scale is null
+    }
+
+//    private fun setDefaultScaleValue(scale: Scale) {
+//        var selectedScale = scale.listOfScales[0]
+//    }
+
+    private fun checkIfScaleIsNull(scale: Scale) {
         if (_scalePickedLive.value == null) {
             _scalePickedLive.value = scale.listOfScales[0].toString()
-            Log.i("note", "createMelody - _scalePickedLive.value is null = ${_scalePickedLive.value}")
         }
-        // TODO: function to set scale to value from scroll wheel (live data)
-        selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
-        Log.i("note", "createMelody - scale frequencies = $selectedScale")
-        // TODO: function to set default values or call generateRandomNote function
+    }
+
+//    private fun setScaleToValueFromScrollWheel(scale: Scale, selectedScale: List<Double>) {
+//        selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
+//    }
+
+    // Set default values or call generateRandomNote function
+    private fun createMelodyList(selectedScale: List<Double>) {
         if (selectedScale.isNullOrEmpty()) {
             val defaultScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
             for (n1 in 1.._countPickedLive.value!!) {
@@ -158,11 +164,61 @@ class HomeViewModel(
                 addNoteToMelodyList(selectedScale)
             }
         }
-        // TODO: function to update the melody (a list of note frequencies)
-        Log.i("note", "createMelody - notes = $notes")
-        _displayNotes.value = notes
-        Log.i("note", "createMelody - _displayNotes = ${_displayNotes.value}")
     }
+
+    // Update the melody (a list of note frequencies)
+    private fun updateMelodyTextViewDisplay() {
+        _displayNotes.value = notes
+    }
+
+    fun generateMelody(generatedList: TextView) {
+        clearOutPreviouslyGeneratedMelody(generatedList)
+        checkIfMelodyLengthIsNull()
+        var scale = Scale()
+//        setDefaultScaleValue(scale)
+        checkIfScaleIsNull(scale)
+        var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
+        createMelodyList(selectedScale)
+        updateMelodyTextViewDisplay()
+    }
+    
+//    // Generate a random melody
+//    fun generateMelody(generatedList: TextView) {
+//        if (generatedList.text != "") {
+//            _displayNotes.value = listOf()
+//            notes = mutableListOf()
+//        }
+//        if (_countPickedLive.value == null) {
+//            _countPickedLive.value = 3
+//            Log.i("note", "createMelody - _countPickedLive.value is null = ${_countPickedLive.value}")
+//        }
+//        var scale = Scale()
+//        var selectedScale = scale.listOfScales[0]
+//        if (_scalePickedLive.value == null) {
+//            _scalePickedLive.value = scale.listOfScales[0].toString()
+//            Log.i("note", "createMelody - _scalePickedLive.value is null = ${_scalePickedLive.value}")
+//        }
+//        selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
+//        Log.i("note", "createMelody - scale frequencies = $selectedScale")
+//
+//        if (selectedScale.isNullOrEmpty()) {
+//            val defaultScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
+//            for (n1 in 1.._countPickedLive.value!!) {
+////                generateRandomNote(defaultScale)
+//                addNoteToMelodyList(defaultScale)
+//            }
+//        } else {
+//            // Create a note with a frequency value and add it to the melody note list
+//            for (n1 in 1.._countPickedLive.value!!) {
+//                // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
+////                generateRandomNote(selectedScale)
+//                addNoteToMelodyList(selectedScale)
+//            }
+//        }
+//        Log.i("note", "createMelody - notes = $notes")
+//        _displayNotes.value = notes
+//        Log.i("note", "createMelody - _displayNotes = ${_displayNotes.value}")
+//    }
 
 
     /**

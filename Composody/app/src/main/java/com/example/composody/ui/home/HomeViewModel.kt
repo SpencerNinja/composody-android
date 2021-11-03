@@ -81,6 +81,7 @@ class HomeViewModel(
         // Initialize a note instance
         var note = Note()
         note.toneObject = PerfectTune()
+        // TODO: call function here to set pattern
         // Generate a random frequency from the selected scale
         var randomFrequencyIndex = Random.nextInt(selectedScale.size)
         var randomFrequency = selectedScale[randomFrequencyIndex]
@@ -155,22 +156,34 @@ class HomeViewModel(
     fun playMelody(view: View) {
         val melodyLength = countPickedLive.value
         var index = 0
-        Log.i("note", "playMelody - view = $view")
-        Log.i("note", "playMelody - melodyLength = $melodyLength")
-        if (view.id == R.id.button_play_melody) {
-            object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    Log.i("note", "playMelody - note frequency = ${notes[index].frequency}")
-                    notes[index].assignFrequency()
-                    notes[index].playFreq()
-                    startCoolDown(notes[index],1)
-                    index += 1
-                }
-                override fun onFinish() {
-                    return
-                }
-            }.start()
-        }
+        Log.i("note", "playMelody - view.id = ${view.id}")
+        Log.i("note", "playMelody - R.id.button_play_melody = ${R.id.button_play_melody}")
+        object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                Log.i("note", "playMelody - note frequency = ${notes[index].frequency}")
+                notes[index].assignFrequency()
+                notes[index].playFreq()
+                startCoolDown(notes[index],1)
+                index += 1
+            }
+            override fun onFinish() {
+                return
+            }
+        }.start()
+//        if (view.id == R.id.button_play_melody) {
+//            object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
+//                override fun onTick(millisUntilFinished: Long) {
+//                    Log.i("note", "playMelody - note frequency = ${notes[index].frequency}")
+//                    notes[index].assignFrequency()
+//                    notes[index].playFreq()
+//                    startCoolDown(notes[index],1)
+//                    index += 1
+//                }
+//                override fun onFinish() {
+//                    return
+//                }
+//            }.start()
+//        }
     }
 
 

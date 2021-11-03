@@ -77,14 +77,12 @@ class HomeViewModel(
     val displayNotes: LiveData<List<Note>>
         get() = _displayNotes
 
-    // Create a Note instance
     private fun createNoteInstance(): Note {
         var note = Note()
         note.toneObject = PerfectTune()
         return note
     }
 
-    // Get randomFrequency from the selected scale
     // TODO: in the future, this will apply pattern
     private fun getRandomFrequency(selectedScale: List<Double>): Double {
         var randomFrequencyIndex = Random.nextInt(selectedScale.size)
@@ -92,14 +90,12 @@ class HomeViewModel(
         return randomFrequency
     }
 
-    // Assign frequency and duration to Note object
     private fun assignFrequencyAndDuration(note: Note, randomFrequency: Double) {
         note.frequency = randomFrequency
         var randomDuration = Random.nextInt(500, 2000)
         note.duration = randomDuration
     }
 
-    // Add the Note object to list of notes (melody)
     private fun addNoteToMelodyList(selectedScale: List<Double>) {
         var note = createNoteInstance()
         var scale = Scale()
@@ -107,19 +103,6 @@ class HomeViewModel(
         assignFrequencyAndDuration(note, randomFrequency)
         notes.add(note)
     }
-
-//    private fun generateRandomNote(selectedScale: List<Double>) {
-//        var note = Note()
-//        note.toneObject = PerfectTune()
-//        var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-//        var randomFrequency = selectedScale[randomFrequencyIndex]
-//        note.frequency = randomFrequency
-//        var randomDuration = Random.nextInt(500, 2000)
-//        note.duration = randomDuration
-//        notes.add(note)
-//        Log.i("note", "createMelody - frequency index = $randomFrequencyIndex")
-//        Log.i("note", "createMelody - frequency = $randomFrequency")
-//    }
 
     private fun clearOutPreviouslyGeneratedMelody(generatedList: TextView) {
         if (generatedList.text != "") {
@@ -134,39 +117,27 @@ class HomeViewModel(
         }
     }
 
-//    private fun setDefaultScaleValue(scale: Scale) {
-//        var selectedScale = scale.listOfScales[0]
-//    }
-
     private fun checkIfScaleIsNull(scale: Scale) {
         if (_scalePickedLive.value == null) {
             _scalePickedLive.value = scale.listOfScales[0].toString()
         }
     }
 
-//    private fun setScaleToValueFromScrollWheel(scale: Scale, selectedScale: List<Double>) {
-//        selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
-//    }
-
-    // Set default values or call generateRandomNote function
     private fun createMelodyList(selectedScale: List<Double>) {
         if (selectedScale.isNullOrEmpty()) {
             val defaultScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
             for (n1 in 1.._countPickedLive.value!!) {
-//                generateRandomNote(defaultScale)
                 addNoteToMelodyList(defaultScale)
             }
         } else {
             // Create a note with a frequency value and add it to the melody note list
             for (n1 in 1.._countPickedLive.value!!) {
                 // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
-//                generateRandomNote(selectedScale)
                 addNoteToMelodyList(selectedScale)
             }
         }
     }
 
-    // Update the melody (a list of note frequencies)
     private fun updateMelodyTextViewDisplay() {
         _displayNotes.value = notes
     }
@@ -175,50 +146,11 @@ class HomeViewModel(
         clearOutPreviouslyGeneratedMelody(generatedList)
         checkIfMelodyLengthIsNull()
         var scale = Scale()
-//        setDefaultScaleValue(scale)
         checkIfScaleIsNull(scale)
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         createMelodyList(selectedScale)
         updateMelodyTextViewDisplay()
     }
-    
-//    // Generate a random melody
-//    fun generateMelody(generatedList: TextView) {
-//        if (generatedList.text != "") {
-//            _displayNotes.value = listOf()
-//            notes = mutableListOf()
-//        }
-//        if (_countPickedLive.value == null) {
-//            _countPickedLive.value = 3
-//            Log.i("note", "createMelody - _countPickedLive.value is null = ${_countPickedLive.value}")
-//        }
-//        var scale = Scale()
-//        var selectedScale = scale.listOfScales[0]
-//        if (_scalePickedLive.value == null) {
-//            _scalePickedLive.value = scale.listOfScales[0].toString()
-//            Log.i("note", "createMelody - _scalePickedLive.value is null = ${_scalePickedLive.value}")
-//        }
-//        selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
-//        Log.i("note", "createMelody - scale frequencies = $selectedScale")
-//
-//        if (selectedScale.isNullOrEmpty()) {
-//            val defaultScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
-//            for (n1 in 1.._countPickedLive.value!!) {
-////                generateRandomNote(defaultScale)
-//                addNoteToMelodyList(defaultScale)
-//            }
-//        } else {
-//            // Create a note with a frequency value and add it to the melody note list
-//            for (n1 in 1.._countPickedLive.value!!) {
-//                // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
-////                generateRandomNote(selectedScale)
-//                addNoteToMelodyList(selectedScale)
-//            }
-//        }
-//        Log.i("note", "createMelody - notes = $notes")
-//        _displayNotes.value = notes
-//        Log.i("note", "createMelody - _displayNotes = ${_displayNotes.value}")
-//    }
 
 
     /**
@@ -235,7 +167,7 @@ class HomeViewModel(
     }
 
     // Start melody playback
-    fun playMelody(view: View) {
+    fun playMelody() {
         val melodyLength = countPickedLive.value
         var index = 0
         object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
@@ -255,15 +187,11 @@ class HomeViewModel(
 
 
     /**
-     * Stop melody audio
+     * Stop melody audio playback
      */
-    // Stop melody playback
-//    fun stopTune(view: View) {
-//        if (view.id == R.id.button_sound_stop) {
-//            //stops the tune
-////            note.toneObject.stopTune()
-//        }
-//    }
+    fun stopTune(note: Note) {
+            note.toneObject.stopTune()
+    }
 
 
     /**

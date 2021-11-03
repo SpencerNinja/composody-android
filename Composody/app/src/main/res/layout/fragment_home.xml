@@ -181,8 +181,10 @@
 
             <TextView
                 android:id="@+id/generated_list"
-                android:layout_width="match_parent"
+                android:layout_width="388dp"
                 android:layout_height="98dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center_horizontal|center_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/generated_subtitle" />
         </androidx.cardview.widget.CardView>

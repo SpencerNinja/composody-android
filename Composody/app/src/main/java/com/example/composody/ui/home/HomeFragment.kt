@@ -67,7 +67,6 @@ class HomeFragment : Fragment() {
         notePicker.setOnValueChangedListener(OnValueChangeListener { numberPicker, i, i1 ->
             val numPositionPicked: Int = notePicker.getValue()
             homeViewModel.setCountLiveData(numPositionPicked)
-            Log.i("note", "inside Listener - countPickedLive = ${homeViewModel.countPickedLive.value}")
         })
 
 
@@ -93,7 +92,6 @@ class HomeFragment : Fragment() {
             val scalePositionPicked: Int = scalePicker.getValue()
             scalePicked = scaleBank[scalePositionPicked]
             homeViewModel.setScaleLiveData(scalePicked)
-            Log.i("note", "inside Listener - scalePickedLive = ${homeViewModel.scalePickedLive.value}")
         })
 
 
@@ -117,7 +115,6 @@ class HomeFragment : Fragment() {
             val moodPositionPicked: Int = moodPicker.getValue()
             var moodPicked = moodBank[moodPositionPicked]
             homeViewModel.setMoodLiveData(moodPicked)
-            Log.i("note", "inside Listener - moodPickedLive = ${homeViewModel.moodPickedLive.value}")
         })
 
 
@@ -128,7 +125,6 @@ class HomeFragment : Fragment() {
         root.findViewById<Button>(R.id.button_generate_melody).setOnClickListener {
             // Create the melody
             homeViewModel.generateMelody(binding.generatedList)
-            Log.i("note", "inside 'Generate Melody' button Listener - createMelody = ${homeViewModel.displayNotes}")
         }
 
 
@@ -138,7 +134,6 @@ class HomeFragment : Fragment() {
         // Observe
         homeViewModel.displayNotes.observe(viewLifecycleOwner, Observer {
             it?.let { melody ->
-                Log.i("note", "inside Observer - melody = $melody")
                 binding.generatedList.text = melody.map {
                     NoteFrequency.mapOfNoteFrequencies[it.frequency]
                 }.toString()
@@ -150,7 +145,7 @@ class HomeFragment : Fragment() {
          * Button to play generated melody
          */
         root.findViewById<Button>(R.id.button_play_melody).setOnClickListener {
-            homeViewModel.playMelody(root)
+            homeViewModel.playMelody()
             Log.i("note", "play button clicked")
         }
 

@@ -18,6 +18,7 @@ class HomeViewModel(
     application: Application
 ) : AndroidViewModel(application), Observable {
 
+    lateinit var test: String
     /**
      * Melody Length scroll wheel
      */

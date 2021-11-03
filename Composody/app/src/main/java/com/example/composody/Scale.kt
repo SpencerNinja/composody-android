@@ -94,14 +94,5 @@ class Scale {
         return scaleNoteFrequencies
     }
 
-    // Choose a random scale from the list of scales
-    fun selectRandomScale(): List<Double> {
-        var randomScaleIndex = Random.nextInt(listOfScales.size)
-        var randomScale = listOfScales[randomScaleIndex]
-//        Log.i("note", "randomIndex = $randomScaleIndex")
-//        Log.i("note", "randomScale = $randomScale")
-        return randomScale
-    }
-
 }
 

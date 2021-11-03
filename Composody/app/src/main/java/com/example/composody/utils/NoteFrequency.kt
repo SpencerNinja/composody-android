@@ -1,4 +1,4 @@
-package com.example.composody.ui
+package com.example.composody.utils
 
 object NoteFrequency {
     val mapOfNoteFrequencies = mapOf(

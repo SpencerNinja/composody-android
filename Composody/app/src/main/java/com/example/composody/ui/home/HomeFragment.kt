@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.NumberPicker.OnValueChangeListener
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.composody.Note
 import com.example.composody.R
 import com.example.composody.Scale
 import com.example.composody.databinding.FragmentHomeBinding
-import com.example.composody.ui.NoteFrequency
+import com.example.composody.utils.NoteFrequency
 
 class HomeFragment : Fragment() {
 
@@ -132,7 +130,7 @@ class HomeFragment : Fragment() {
         // OnClickListener for "Generate" melody button
         root.findViewById<Button>(R.id.button_generate_melody).setOnClickListener {
             // Create the melody
-            homeViewModel.createMelody()
+            homeViewModel.createMelody(binding.generatedList)
             Log.i("note", "inside 'Generate Melody' button Listener - createMelody = ${homeViewModel.displayNotes}")
         }
 
@@ -154,7 +152,11 @@ class HomeFragment : Fragment() {
         /**
          * Button to play generated melody
          */
-        homeViewModel.playMelody(root)
+        root.findViewById<Button>(R.id.button_play_melody).setOnClickListener {
+            homeViewModel.playMelody(root)
+            Log.i("note", "play button clicked")
+        }
+
 
 
         return root

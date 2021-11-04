@@ -3,14 +3,12 @@ package com.example.composody.ui.home
 import android.app.Application
 import android.os.CountDownTimer
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.*
-import com.example.composody.Note
-import com.example.composody.R
-import com.example.composody.Scale
+import com.example.composody.data.Note
+import com.example.composody.data.Scale
 import com.karlotoy.perfectune.instance.PerfectTune
 import kotlin.random.Random
 

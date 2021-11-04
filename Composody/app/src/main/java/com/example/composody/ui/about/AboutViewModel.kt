@@ -10,4 +10,5 @@ class AboutViewModel : ViewModel() {
         value = "This is About App Fragment"
     }
     val text: LiveData<String> = _text
+
 }

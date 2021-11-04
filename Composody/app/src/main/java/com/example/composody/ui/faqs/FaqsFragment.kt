@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.composody.databinding.FragmentFaqsBinding
+import com.example.composody.faqsdatabase.FAQsDatabase
 
 class FaqsFragment : Fragment() {
 
     private lateinit var faqsViewModel: FaqsViewModel
     private var _binding: FragmentFaqsBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -24,16 +24,19 @@ class FaqsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        faqsViewModel =
-            ViewModelProvider(this).get(FaqsViewModel::class.java)
 
         _binding = FragmentFaqsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textFaqs
-        faqsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = FAQsDatabase.getInstance(application).faqsDatabaseDao
+
+        val viewModelFactory = FaqsViewModelFactory(dataSource, application)
+
+        faqsViewModel =
+            ViewModelProvider(
+                this, viewModelFactory).get(FaqsViewModel::class.java)
         return root
     }
 

@@ -9,15 +9,15 @@ import androidx.room.Update
 interface FAQsDatabaseDao {
 
     @Insert
-    suspend fun insert(faq: FAQs)
+    suspend fun insert(faq: FAQ)
 
     @Update
-    suspend fun update(faq: FAQs)
+    suspend fun update(faq: FAQ)
 
-    @Query("SELECT * from faqs_table WHERE faqsId = :key")
-    suspend fun get(key: Long): FAQs?
+    @Query("SELECT * from faqs_table")
+    suspend fun getFAQ(): FAQ?
 
-//    @Query("SELECT * FROM faqs_table ORDER BY faqsId DESC")
-//    fun getAllFAQs() List<String>
+    @Query("SELECT * FROM faqs_table ORDER BY faqsId DESC")
+    fun getAllFAQs(): List<String>
 
 }

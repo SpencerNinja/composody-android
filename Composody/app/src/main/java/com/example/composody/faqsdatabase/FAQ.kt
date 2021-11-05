@@ -8,12 +8,12 @@ import androidx.room.PrimaryKey
 data class FAQ(
 
     @PrimaryKey(autoGenerate = true)
-    var faqsId: Long = 0L,
+    var faqsId: Long? = 0L,
 
     @ColumnInfo(name = "question")
-    val question: String = "",
+    var question: String = "",
 
     @ColumnInfo(name = "answer")
-    val answer: String = ""
+    var answer: String = ""
 
 )

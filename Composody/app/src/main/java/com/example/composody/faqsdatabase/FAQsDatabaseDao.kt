@@ -1,18 +1,12 @@
 package com.example.composody.faqsdatabase
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface FAQsDatabaseDao {
 
-    @Insert
-    suspend fun insert(faq: FAQ)
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllFAQs(faq: List<FAQ>)
 
     @Update
@@ -22,6 +16,6 @@ interface FAQsDatabaseDao {
     suspend fun getFAQ(): FAQ?
 
     @Query("SELECT * FROM faqs_table ORDER BY faqsId DESC")
-    fun getAllFAQs(): LiveData<List<String>>
+    fun getAllFAQs(): LiveData<List<FAQ>>
 
 }

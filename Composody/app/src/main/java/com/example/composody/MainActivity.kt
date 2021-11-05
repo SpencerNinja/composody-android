@@ -1,5 +1,6 @@
 package com.example.composody
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.navigation.NavigationView
@@ -10,8 +11,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.composody.data.CurrentFAQs
 import com.example.composody.databinding.ActivityMainBinding
+import com.example.composody.faqsdatabase.FAQsDatabase
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        checkFirstRun()
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
@@ -42,6 +49,28 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+    }
+
+    private fun checkFirstRun() {
+        val sharedPrefs = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE)
+        val firstRun = sharedPrefs.getBoolean("first_run", true)
+
+        if (firstRun) {
+            lifecycleScope.launch{
+                forceDatabaseInit()
+            }
+            sharedPrefs.edit().putBoolean("first_run", false).apply()
+        }
+    }
+
+    private fun forceDatabaseInit() {
+        val database = FAQsDatabase.getInstance(application).faqsDatabaseDao
+        // CurrentFAQs
+        lifecycleScope.launch {
+            database.insertAllFAQs(CurrentFAQs.listOfFAQs)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -32,11 +32,11 @@ class FaqsFragment : Fragment() {
 
         val dataSource = FAQsDatabase.getInstance(application).faqsDatabaseDao
 
-        val viewModelFactory = FaqsViewModelFactory(dataSource, application)
+//        val viewModelFactory = FaqsViewModelFactory(dataSource, application)
 
         faqsViewModel =
             ViewModelProvider(
-                this, viewModelFactory).get(FaqsViewModel::class.java)
+                this).get(FaqsViewModel::class.java)
         return root
     }
 

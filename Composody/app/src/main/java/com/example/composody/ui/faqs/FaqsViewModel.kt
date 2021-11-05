@@ -3,19 +3,18 @@ package com.example.composody.ui.faqs
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.composody.faqsdatabase.FAQ
+import com.example.composody.faqsdatabase.FAQsDatabase
 import com.example.composody.faqsdatabase.FAQsDatabaseDao
 import kotlinx.coroutines.*
 
-class FaqsViewModel() : ViewModel() {
-    inner class InnerFaqsViewModel(
-        // pass in instance of SleepDatabaseDao
-        // pass in application to access strings and styles
-        val database: FAQsDatabaseDao,
-        application: Application
-    ) : AndroidViewModel(application) {
+class FaqsViewModel(
+    application: Application
+) : AndroidViewModel(application) {
 
         // Create a viewModelJob and override onCleared() for canceling coroutines
         private var viewModelJob = Job()
+
+        private val database = FAQsDatabase.getInstance(application).faqsDatabaseDao
 
         override fun onCleared() {
             super.onCleared()
@@ -23,7 +22,6 @@ class FaqsViewModel() : ViewModel() {
         }
         // Define a scope for the coroutines to run in
         private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
 
         // Create faq live data
         private var faq = MutableLiveData<FAQ?>()
@@ -50,5 +48,4 @@ class FaqsViewModel() : ViewModel() {
     //    }
     //    val text: LiveData<String> = _text
 
-    }
 }

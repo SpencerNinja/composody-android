@@ -1,4 +1,4 @@
-package com.example.composody
+package com.example.composody.data
 
 import com.karlotoy.perfectune.instance.PerfectTune
 import kotlin.random.Random

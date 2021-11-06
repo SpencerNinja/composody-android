@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.composody.R
-import com.example.composody.Scale
+import com.example.composody.data.Scale
 import com.example.composody.databinding.FragmentHomeBinding
 import com.example.composody.utils.NoteFrequency
 

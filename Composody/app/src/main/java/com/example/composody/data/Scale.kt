@@ -1,7 +1,6 @@
-package com.example.composody
+package com.example.composody.data
 
 import android.util.Log
-import kotlin.random.Random
 
 class Scale {
 

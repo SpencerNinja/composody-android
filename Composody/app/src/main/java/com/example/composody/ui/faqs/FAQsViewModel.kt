@@ -7,14 +7,23 @@ import com.example.composody.faqsdatabase.FAQsDatabase
 import com.example.composody.faqsdatabase.FAQsDatabaseDao
 import kotlinx.coroutines.*
 
-class FaqsViewModel(
+class FAQsViewModel(
+    val database: FAQsDatabaseDao,
     application: Application
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
         // Create a viewModelJob and override onCleared() for canceling coroutines
         private var viewModelJob = Job()
 
-        private val database = FAQsDatabase.getInstance(application).faqsDatabaseDao
+        private val databaseDao = FAQsDatabase.getInstance(application).faqsDatabaseDao
+
+        private val _selectedFAQ = MutableLiveData<FAQ?>()
+        val selectedFAQ: LiveData<FAQ?>
+            get() = _selectedFAQ
+
+        fun setFAQ(faq: FAQ) {
+            _selectedFAQ.value = faq
+        }
 
         override fun onCleared() {
             super.onCleared()
@@ -27,7 +36,7 @@ class FaqsViewModel(
         private var faq = MutableLiveData<FAQ?>()
 
         // Get all nights from the database
-        private val faqs = database.getAllFAQs()
+        private val faqs = databaseDao.getAllFAQs()
 
         // Initialize
         private fun initializeTonight() {
@@ -38,7 +47,7 @@ class FaqsViewModel(
 
         private suspend fun getFAQFromDatabase(): FAQ? {
             return withContext(Dispatchers.IO) {
-                var faq = database.getFAQ()
+                var faq = databaseDao.getFAQ()
                 faq
             }
         }

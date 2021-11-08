@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_faqs"
-        android:name="com.example.composody.ui.faqs.FaqsFragment"
+        android:name="com.example.composody.ui.faqs.FAQsFragment"
         android:label="@string/menu_faqs"
         tools:layout="@layout/fragment_faqs" />
 

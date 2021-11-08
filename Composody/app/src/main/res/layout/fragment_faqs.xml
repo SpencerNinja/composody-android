@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.faqs.FaqsFragment">
+    tools:context=".ui.faqs.FAQsFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.composody.ui.faqs.FaqsViewModel" />
+            type="com.example.composody.ui.faqs.FAQsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

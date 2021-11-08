@@ -10,6 +10,7 @@
     <color name="green">#FF5AA67D</color>
     <color name="gold">#FFFFCC66</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="dark_overlay">#99000000</color>
 </resources>
 
 <!--<color name="gold">#FFF4CA75</color>-->

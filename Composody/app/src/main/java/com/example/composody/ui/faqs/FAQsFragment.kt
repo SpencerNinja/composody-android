@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.composody.data.CurrentFAQs
 import com.example.composody.databinding.FragmentFaqsBinding
@@ -39,6 +40,10 @@ class FAQsFragment : Fragment() {
         val adapter = FAQsAdapter(viewModel)
         binding.faqsList.adapter = adapter
         adapter.submitList(faqsList)
+
+//        viewModel.selectedFAQ.observe(viewLifecycleOwner, Observer { faq ->
+//            adapter.submitList(faq)
+//        })
 
         return root
     }

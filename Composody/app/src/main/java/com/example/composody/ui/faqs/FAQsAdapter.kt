@@ -41,6 +41,7 @@ class FAQsAdapter (
             var answer = binding.faqAnswer
 
             question.text = item.question
+            answer.text = item.answer
 
         }
     }

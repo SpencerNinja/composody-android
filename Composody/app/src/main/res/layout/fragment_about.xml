@@ -11,12 +11,124 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="616dp" />
+
+    <TextView
+        android:id="@+id/developers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developers"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="51dp" />
+
+    <TextView
+        android:id="@+id/spencer_hurd_dev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spencer Hurd"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="89dp" />
+
+    <TextView
+        android:id="@+id/instructors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instructors"
+        tools:layout_editor_absoluteX="271dp"
+        tools:layout_editor_absoluteY="51dp" />
+
+    <TextView
+        android:id="@+id/brad_campbell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brad Campbell"
+        tools:layout_editor_absoluteX="247dp"
+        tools:layout_editor_absoluteY="108dp" />
+
+    <TextView
+        android:id="@+id/phil_trunnell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phil Trunnell"
+        tools:layout_editor_absoluteX="262dp"
+        tools:layout_editor_absoluteY="89dp" />
+
+    <TextView
+        android:id="@+id/designers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Designers"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="157dp" />
+
+    <TextView
+        android:id="@+id/spencer_hurd_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spencer Hurd"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="199dp" />
+
+    <TextView
+        android:id="@+id/bracken_thiriot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bracken Thiriot"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <TextView
+        android:id="@+id/cameron_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cameron _____"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="237dp" />
+
+    <TextView
+        android:id="@+id/background_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Background Image"
+        tools:layout_editor_absoluteX="221dp"
+        tools:layout_editor_absoluteY="157dp" />
+
+    <TextView
+        android:id="@+id/photo_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amin Asbaghipour"
+        tools:layout_editor_absoluteX="224dp"
+        tools:layout_editor_absoluteY="199dp" />
+
+    <TextView
+        android:id="@+id/photo_src"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pexels.com"
+        tools:layout_editor_absoluteX="262dp"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MapView"
+        tools:layout_editor_absoluteX="189dp"
+        tools:layout_editor_absoluteY="506dp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I'd like to wish a special thanks \nto Dixie Tech, DSU, and Toolbox OS, \nwhere I learned to become a better \n programmer and designer"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="364dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_faqs.xml" value="0.2558876811594203" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
         <entry key="app/src/main/res/layout/list_item_faq.xml" value="0.2558876811594203" />
         <entry key="app/src/main/res/layout/recycler_view_item.xml" value="0.2558876811594203" />
       </map>

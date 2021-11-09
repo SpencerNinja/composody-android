@@ -23,9 +23,9 @@
             android:id="@+id/imageView2"
             android:layout_width="222dp"
             android:layout_height="141dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="80dp"
             android:contentDescription="@string/composody_logo"
-            android:src="@drawable/logo_triangle_black"
+            android:src="@drawable/logo_center_gold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,6 +115,8 @@
             android:id="@+id/cardview_generated"
             android:layout_width="409dp"
             android:layout_height="100dp"
+            app:cardBackgroundColor="#B3FFFFFF"
+            app:cardCornerRadius="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -138,8 +140,8 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="80dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,8 +150,8 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="80dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
             android:layout_marginStart="52dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -159,8 +161,8 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="80dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
             android:layout_marginStart="56dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="parent"

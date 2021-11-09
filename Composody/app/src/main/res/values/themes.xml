@@ -12,6 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/gold</item>
     </style>
 
     <style name="Theme.Composody.NoActionBar">
@@ -22,4 +28,8 @@
     <style name="Theme.Composody.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Composody.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<!--    <style name="hamburgerMenu" parent="@style/Widget.AppCompat.PopupMenu">-->
+<!--        <item name="colorControlNormal">@color/white</item>-->
+<!--    </style>-->
 </resources>

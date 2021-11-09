@@ -113,7 +113,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_generated"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             app:cardBackgroundColor="#B3FFFFFF"
             app:cardCornerRadius="5dp"

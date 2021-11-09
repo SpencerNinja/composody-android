@@ -33,7 +33,12 @@ class MapView : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         val dixietech = LatLng(37.09860, -113.59165)
-        mMap.addMarker(MarkerOptions().position(dixietech).title("Marker at Dixie Tech University"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(dixietech))
+        mMap.addMarker(MarkerOptions()
+            .position(dixietech)
+            .title("Dixie Tech University")
+        )
+        mMap.moveCamera(CameraUpdateFactory
+            .newLatLng(dixietech)
+        )
     }
 }

@@ -25,7 +25,7 @@
         app:layout_anchor="@+id/appBarLayout"
         app:layout_anchorGravity="center"
         app:popupTheme="@style/Theme.Composody.PopupOverlay"
-        app:titleTextColor="@color/gold" />
+        app:titleTextColor="@color/white" />
 
 <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/fab"-->

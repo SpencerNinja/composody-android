@@ -27,6 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="Developers"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/instructors"
         app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +41,8 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="24dp"
         android:text="Spencer Hurd"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/phil_trunnell"
         app:layout_constraintHorizontal_bias="0.007"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +55,8 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="52dp"
         android:text="Instructors"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,6 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Brad Campbell"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintStart_toEndOf="@+id/spencer_hurd_dev"
@@ -71,6 +79,8 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="52dp"
         android:text="Phil Trunnell"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructors" />
 
@@ -80,6 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="Designers"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/background_image"
         app:layout_constraintHorizontal_bias="0.318"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Spencer Hurd"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/photo_credit"
         app:layout_constraintHorizontal_bias="0.358"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +115,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bracken Thiriot"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/photo_src"
         app:layout_constraintHorizontal_bias="0.296"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +127,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cameron _____"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/photo_src"
         app:layout_constraintHorizontal_bias="0.295"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +141,8 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="52dp"
         android:text="Background Image"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/brad_campbell" />
 
@@ -132,7 +152,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="52dp"
-        android:text="Amin Asbaghipour"
+        android:text="Eva Elijas"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/background_image" />
 
@@ -142,6 +164,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:text="Pexels.com"
+        android:textColor="@color/green"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/photo_credit" />
 
@@ -161,6 +185,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="I'd like to wish a special thanks \nto Dixie Tech, DSU, and Toolbox OS, \nwhere I learned to become a better \n programmer and designer"
+        android:textColor="@color/gold"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cameron_" />

@@ -16,6 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.composody.data.CurrentFAQs
 import com.example.composody.databinding.ActivityMainBinding
 import com.example.composody.faqsdatabase.FAQsDatabase
+import com.example.composody.ui.about.AboutFragment
+import com.google.android.gms.maps.MapFragment
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -78,4 +80,5 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }

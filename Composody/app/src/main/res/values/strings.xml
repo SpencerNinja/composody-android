@@ -17,4 +17,16 @@
     <string name="composody_logo">Composody logo</string>
     <string name="melody_placeholder">The generated melody will output here!</string>
     <string name="melody_subtitle">Generated Melody:</string>
+    <string name="developers">Developers</string>
+    <string name="spencer_hurd">Spencer Hurd</string>
+    <string name="instructors">Instructors</string>
+    <string name="brad_campbell">Brad Campbell</string>
+    <string name="phil_trunnell">Phil Trunnell</string>
+    <string name="designers">Designers</string>
+    <string name="bracken_thiriot">Bracken Thiriot</string>
+    <string name="cameron">Cameron _____</string>
+    <string name="backdrop">Backdrop</string>
+    <string name="eva_elijas">Eva Elijas</string>
+    <string name="pexels_com">Pexels.com</string>
+    <string name="thank_you">Thank you\n Dixie Tech, DSU, Toolbox OS, and\n the afternoon App Dev class,\n for helping me become a better \n programmer and designer</string>
 </resources>

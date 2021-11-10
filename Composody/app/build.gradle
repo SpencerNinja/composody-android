@@ -53,6 +53,8 @@ dependencies {
 
     // Google Map
     implementation 'com.google.android.gms:play-services-maps:18.0.0'
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
+
 
     // Live Data
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'

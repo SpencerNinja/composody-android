@@ -38,24 +38,6 @@ abstract class FAQsDatabase : RoomDatabase() {
                 ).build()
         }
 
-//        fun getInstance(context: Context): FAQsDatabase {
-//            synchronized(this){
-//
-//                var instance = INSTANCE
-//
-//                if (instance == null) {
-//                    instance = Room.databaseBuilder(
-//                        context.applicationContext,
-//                        FAQsDatabase::class.java,
-//                        "faqs_database"
-//                    )
-//                        .fallbackToDestructiveMigration()
-//                        .build()
-//                    INSTANCE = instance
-//                }
-//                return instance
-//            }
-//        }
     }
 
 }

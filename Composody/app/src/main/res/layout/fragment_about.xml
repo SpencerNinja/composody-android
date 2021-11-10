@@ -6,176 +6,182 @@
     android:layout_height="match_parent"
     tools:context=".ui.about.AboutFragment">
 
-    <TextView
-        android:id="@+id/developers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Developers"
-        android:textColor="@color/gold"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/instructors"
-        app:layout_constraintHorizontal_bias="0.257"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@color/dark_overlay" >
 
-    <TextView
-        android:id="@+id/spencer_hurd_dev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="Spencer Hurd"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/phil_trunnell"
-        app:layout_constraintHorizontal_bias="0.007"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/developers" />
+        <TextView
+            android:id="@+id/developers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/developers"
+            android:textColor="@color/gold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/instructors"
+            app:layout_constraintHorizontal_bias="0.383"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/instructors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="52dp"
-        android:text="Instructors"
-        android:textColor="@color/gold"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/spencer_hurd_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/spencer_hurd"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/phil_trunnell"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/developers"
+            app:layout_constraintTop_toBottomOf="@+id/developers" />
 
-    <TextView
-        android:id="@+id/brad_campbell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Brad Campbell"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.706"
-        app:layout_constraintStart_toEndOf="@+id/spencer_hurd_dev"
-        app:layout_constraintTop_toBottomOf="@+id/phil_trunnell" />
+        <TextView
+            android:id="@+id/instructors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="52dp"
+            android:text="@string/instructors"
+            android:textColor="@color/gold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/developers" />
 
-    <TextView
-        android:id="@+id/phil_trunnell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="52dp"
-        android:text="Phil Trunnell"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructors" />
+        <TextView
+            android:id="@+id/brad_campbell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/brad_campbell"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/phil_trunnell"
+            app:layout_constraintTop_toBottomOf="@+id/phil_trunnell" />
 
-    <TextView
-        android:id="@+id/designers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Designers"
-        android:textColor="@color/gold"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/background_image"
-        app:layout_constraintHorizontal_bias="0.318"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spencer_hurd_dev" />
+        <TextView
+            android:id="@+id/phil_trunnell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phil_trunnell"
+            android:textColor="@color/green"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/instructors"
+            app:layout_constraintTop_toTopOf="@+id/spencer_hurd_dev" />
 
-    <TextView
-        android:id="@+id/spencer_hurd_des"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Spencer Hurd"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/photo_credit"
-        app:layout_constraintHorizontal_bias="0.358"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/designers" />
+        <TextView
+            android:id="@+id/designers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="@string/designers"
+            android:textColor="@color/gold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/background_image"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/spencer_hurd_dev"
+            app:layout_constraintTop_toBottomOf="@+id/spencer_hurd_dev" />
 
-    <TextView
-        android:id="@+id/bracken_thiriot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bracken Thiriot"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/photo_src"
-        app:layout_constraintHorizontal_bias="0.296"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spencer_hurd_des" />
+        <TextView
+            android:id="@+id/spencer_hurd_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/spencer_hurd"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/photo_credit"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/designers"
+            app:layout_constraintTop_toBottomOf="@+id/designers" />
 
-    <TextView
-        android:id="@+id/cameron_"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cameron _____"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/photo_src"
-        app:layout_constraintHorizontal_bias="0.295"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bracken_thiriot" />
+        <TextView
+            android:id="@+id/bracken_thiriot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bracken_thiriot"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/photo_src"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/spencer_hurd_des"
+            app:layout_constraintTop_toBottomOf="@+id/spencer_hurd_des" />
 
-    <TextView
-        android:id="@+id/background_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="52dp"
-        android:text="Background Image"
-        android:textColor="@color/gold"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/brad_campbell" />
+        <TextView
+            android:id="@+id/cameron_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cameron"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/photo_src"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/bracken_thiriot"
+            app:layout_constraintTop_toBottomOf="@+id/bracken_thiriot" />
 
-    <TextView
-        android:id="@+id/photo_credit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="52dp"
-        android:text="Eva Elijas"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/background_image" />
+        <TextView
+            android:id="@+id/background_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/backdrop"
+            android:textColor="@color/gold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/brad_campbell"
+            app:layout_constraintTop_toTopOf="@+id/designers" />
 
-    <TextView
-        android:id="@+id/photo_src"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:text="Pexels.com"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_credit" />
+        <TextView
+            android:id="@+id/photo_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="56dp"
+            android:text="@string/eva_elijas"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/spencer_hurd_des" />
 
-    <TextView
-        android:id="@+id/thanks_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center_horizontal"
-        android:text="A special thanks \nto Dixie Tech, DSU, and Toolbox OS, \nwhere I learned to become a better \n programmer and designer"
-        android:textColor="@color/gold"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cameron_" />
+        <TextView
+            android:id="@+id/photo_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="56dp"
+            android:text="@string/pexels_com"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo_credit" />
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thanks_message"
-        tools:context=".ui.about.MapView" />
+        <TextView
+            android:id="@+id/thanks_message"
+            android:layout_width="269dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center_horizontal"
+            android:text="@string/thank_you"
+            android:textColor="@color/gold"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/photo_src"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/cameron_"
+            app:layout_constraintTop_toBottomOf="@+id/cameron_" />
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thanks_message"
+            app:layout_constraintVertical_bias="0.666"
+            tools:context=".ui.about.MapView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

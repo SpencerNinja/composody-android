@@ -170,7 +170,7 @@ class HomeViewModel(
         var index = 0
         object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                // TODO: function to assign and play frequency note
+                // function to assign and play frequency note
                 Log.i("note", "playMelody - note frequency = ${notes[index].frequency}")
                 notes[index].assignFrequency()
                 notes[index].playFreq()

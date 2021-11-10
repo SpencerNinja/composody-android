@@ -2,6 +2,10 @@ package com.example.composody.utils
 
 object NoteFrequency {
     val mapOfNoteFrequencies = mapOf(
+        174.6141 to "F3",
+        184.9972 to "Gb3",
+        195.9977 to "G3",
+        207.6523 to "Ab3",
         220.0000 to "A3",
         233.0819 to "Bb3",
         246.9417 to "B3",

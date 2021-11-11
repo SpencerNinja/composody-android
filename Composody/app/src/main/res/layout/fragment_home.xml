@@ -21,22 +21,23 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="222dp"
-            android:layout_height="141dp"
-            android:layout_marginTop="80dp"
+            android:layout_width="220dp"
+            android:layout_height="140dp"
             android:contentDescription="@string/composody_logo"
             android:src="@drawable/logo_center_gold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.094" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="60dp"
             android:layout_height="70dp"
             android:layout_marginStart="44dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="28dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             app:srcCompat="@drawable/icon_melody_green" />
@@ -77,7 +78,7 @@
 
             <NumberPicker
                 android:id="@+id/number_picker"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="190dp"
                 android:background="#00FFFFFF" />
         </androidx.cardview.widget.CardView>
@@ -95,7 +96,7 @@
 
             <NumberPicker
                 android:id="@+id/scale_picker"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="190dp"
                 android:background="#00FFFFFF" />
 
@@ -115,7 +116,7 @@
 
             <NumberPicker
                 android:id="@+id/pattern_picker"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="190dp"
                 android:background="#00FFFFFF" />
         </androidx.cardview.widget.CardView>

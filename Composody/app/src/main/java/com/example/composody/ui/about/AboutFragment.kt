@@ -21,7 +21,7 @@ class AboutFragment : Fragment() {
 
     private val callback = OnMapReadyCallback { googleMap ->
         viewLifecycleOwner.lifecycleScope.launch {
-            val zoomAmount = 15.0F
+            val zoomAmount = 13.0F
 
             val target = LatLng(37.09860, -113.59165)
             googleMap.addMarker(target.let { MarkerOptions().position(it).title(target.toString()) })

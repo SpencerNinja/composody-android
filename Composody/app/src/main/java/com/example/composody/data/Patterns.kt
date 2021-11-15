@@ -129,7 +129,7 @@ class Patterns {
             }
             if (count % 3 == 0) {
                 val jump = listOf(-3,-2,-1,0,1,2,3).random()
-                newIndex =
+                newIndex = lastUsedIndex + jump
             }
             lastUsedIndex = newIndex
             note = selectedScale[newIndex]
@@ -140,26 +140,151 @@ class Patterns {
     }
     // Triad Ascend (1,2,3)
     private fun ascendTriad(melody: MutableList<Double>): List<Double> {
+        val stretchOfNotes = (3..6).random()
+        var note = checkForLastGeneratedNote(melody)
+        var newIndex = lastUsedIndex
+        var count = 0
+        while (count < stretchOfNotes) {
+            if (count % 3 == 0) {
+                newIndex = lastUsedIndex + 0
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else if (count % 3 == 1) {
+                newIndex = lastUsedIndex + 1
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else {
+                newIndex = lastUsedIndex + 2
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+                lastUsedIndex -= 3
+            }
+            melody.add(note)
+            count += 1
+        }
         return melody
     }
     // Triad Descend (3,2,1)
     private fun descendTriad(melody: MutableList<Double>): List<Double> {
+        val stretchOfNotes = (3..6).random()
+        var note = checkForLastGeneratedNote(melody)
+        var newIndex = lastUsedIndex
+        var count = 0
+        while (count < stretchOfNotes) {
+            if (count % 3 == 0) {
+                newIndex = lastUsedIndex + 0
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else if (count % 3 == 1) {
+                newIndex = lastUsedIndex - 1
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else {
+                newIndex = lastUsedIndex - 2
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+                lastUsedIndex += 3
+            }
+            melody.add(note)
+            count += 1
+        }
         return melody
     }
     // Pyramid (1,3,2)
     private fun pyramid(melody: MutableList<Double>): List<Double> {
+        val stretchOfNotes = (3..6).random()
+        var note = checkForLastGeneratedNote(melody)
+        var newIndex = lastUsedIndex
+        var count = 0
+        while (count < stretchOfNotes) {
+            if (count % 3 == 0) {
+                newIndex = lastUsedIndex + 0
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else if (count % 3 == 1) {
+                newIndex = lastUsedIndex + 2
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else {
+                newIndex = lastUsedIndex - 1
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+                lastUsedIndex -= 1
+            }
+            melody.add(note)
+            count += 1
+        }
         return melody
     }
     // Deku (2,3,1)
     private fun deku(melody: MutableList<Double>): List<Double> {
+        val stretchOfNotes = (3..6).random()
+        var note = checkForLastGeneratedNote(melody)
+        var newIndex = lastUsedIndex
+        var count = 0
+        while (count < stretchOfNotes) {
+            if (count % 3 == 0) {
+                newIndex = lastUsedIndex + 1
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else if (count % 3 == 1) {
+                newIndex = lastUsedIndex + 1
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+            } else {
+                newIndex = lastUsedIndex - 2
+                lastUsedIndex = newIndex
+                note = selectedScale[newIndex]
+                lastUsedIndex += 1
+            }
+            melody.add(note)
+            count += 1
+        }
         return melody
     }
     // Steps (1,1,2,2,3,3)
     private fun steps(melody: MutableList<Double>): List<Double> {
+        val stretchOfNotes = (2..12).random()
+        var note = checkForLastGeneratedNote(melody)
+        var count = 0
+        var newIndex = lastUsedIndex
+        while (count < stretchOfNotes) {
+            if (count % 3 == 0) {
+                newIndex = lastUsedIndex + 0
+            } else if (count % 3 == 1) {
+                newIndex = lastUsedIndex + 1
+            }
+            if (count % 3 == 2) {
+                val jump = listOf(-2,-1,1,2).random()
+                newIndex = lastUsedIndex + jump
+            }
+            lastUsedIndex = newIndex
+            note = selectedScale[newIndex]
+            melody.add(note)
+            count += 1
+        }
         return melody
     }
     // Skip (1,1,2,2,1,1,2,2)
     private fun skip(melody: MutableList<Double>): List<Double> {
+        val stretchOfNotes = (2..12).random()
+        var note = checkForLastGeneratedNote(melody)
+        var count = 0
+        var newIndex = lastUsedIndex
+        while (count < stretchOfNotes) {
+            if (count % 3 == 0) {
+                newIndex = lastUsedIndex + 0
+            } else if (count % 3 == 1) {
+                newIndex = lastUsedIndex + 1
+            }
+            if (count % 3 == 2) {
+                newIndex = lastUsedIndex - 1
+            }
+            lastUsedIndex = newIndex
+            note = selectedScale[newIndex]
+            melody.add(note)
+            count += 1
+        }
         return melody
     }
 

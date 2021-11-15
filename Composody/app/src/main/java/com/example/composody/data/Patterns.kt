@@ -2,14 +2,23 @@ package com.example.composody.data
 
 class Patterns {
 
-    // Create an empty list to store the collection of notes
-    var melody = mutableListOf<Double>()
+    // Number of Notes selected
+    var totalNotes = 0
 
     // Which scale did the user select
     val selectedScale = listOf(174.6141,195.9977,220.0000,261.6256,293.6648,349.2282,391.9954,440.0000,523.2511,587.3295,783.9909,880.0000,1046.5020)
 
+    // Chosen Mood
+    val chosenMood = listOf(listOf<Double>())
+
     // Value to store last index used in scale
     var lastIndexOfScaleUsed = 0
+
+    // Number of notes added to melody
+    var totalNotesAdded = 0
+
+    // Create an empty list to store the collection of notes
+    var melody = mutableListOf<Double>()
 
     /**
      * Moods
@@ -70,6 +79,9 @@ class Patterns {
         return melody
     }
 
+    /**
+     * Speciality Functions
+     */
     fun checkForLastGeneratedNote(): Double {
         val middleIndex = selectedScale.size / 2
         var chosenNote: Double
@@ -81,9 +93,32 @@ class Patterns {
         return chosenNote
     }
 
-    fun randomlySelectPattern(moodPicked: List<List<Double>>) {}
+    fun randomlySelectPattern(moodPicked: List<List<Double>>): List<Double> {
+        var randomPattern = ascend()
+        for (pattern in moodPicked) {
+            randomPattern = moodPicked.random()
+        }
+        return randomPattern
+    }
 
-    fun generateMelodyBasedOnSelectedMood(totalNotes: Int, selectedScale: List<Double>, moodPicked: List<List<Double>>) {}
+    fun checkMelodyLength() {
+        while (melody.size < totalNotes) {
+             checkForLastGeneratedNote()
+             randomlySelectPattern(chosenMood)
+        }
+        if (melody.size > totalNotes) {
+            val howMuchOverTotalNotes = melody.size - totalNotes
+            // remove (melody.size - totalNotes) from end of melody
+            while (howMuchOverTotalNotes > 0) {
+                melody.removeLast()
+            }
+        }
+    }
+
+    fun generateMelodyBasedOnSelectedMood(totalNotes: Int, selectedScale: List<Double>, moodPicked: List<List<Double>>): List<Double> {
+        checkMelodyLength()
+        return melody
+    }
 
 }
 

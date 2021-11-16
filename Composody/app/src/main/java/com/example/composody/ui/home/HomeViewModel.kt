@@ -76,38 +76,48 @@ class HomeViewModel(
     val displayNotes: LiveData<List<Note>>
         get() = _displayNotes
 
+    // Last used index of note
+    var lastUsedIndex = 0
+
+    private fun updateMelodyTextViewDisplay() {
+        _displayNotes.value = notes
+    }
+
+    private fun assignFrequencyAndDuration(note: Note, noteFrequency: Double) {
+        note.frequency = noteFrequency
+        var randomDuration = Random.nextInt(500, 2000)
+        note.duration = randomDuration
+    }
+
     private fun createNoteInstance(): Note {
         var note = Note()
         note.toneObject = PerfectTune()
         return note
     }
 
-    // TODO: in the future, this will apply pattern
-    private fun getRandomFrequency(selectedScale: List<Double>): Double {
-        var randomFrequencyIndex = Random.nextInt(selectedScale.size)
-        var randomFrequency = selectedScale[randomFrequencyIndex]
-        return randomFrequency
+    fun generateMelodyBasedOnSelectedMood(): List<Double> {
+        var melody = mutableListOf<Double>()
+        val rocky = listOf<List<Double>>(ascend(melody),descend(melody))
+        val dangerous = listOf<List<Double>>(fibonacci(melody), pi(melody), heartbeat(melody))
+        val lullaby = listOf<List<Double>>(waltz(melody))
+        val soaring = listOf<List<Double>>(ascend(melody), ascendTriad(melody), descend(melody),
+            descendTriad(melody), deku(melody), pyramid(melody), steps(melody))
+        val rainyDay = listOf<List<Double>>(skip(melody))
+        val listOfMoods = mapOf("rocky" to rocky, "dangerous" to dangerous, "lullaby" to lullaby,
+            "soaring" to soaring, "rainyDay" to rainyDay)
+        var chosenMood = rocky
+        for ((key, value) in listOfMoods) {
+            if (key == moodPickedLive.value) {
+                chosenMood = value
+            }
+        }
+        checkMelodyLength(melody, chosenMood)
+        return melody
     }
 
-    private fun assignFrequencyAndDuration(note: Note, randomFrequency: Double) {
-        note.frequency = randomFrequency
-        var randomDuration = Random.nextInt(500, 2000)
-        note.duration = randomDuration
-    }
-
-    // TODO: update
-    private fun addNoteToMelodyList(selectedScale: List<Double>) {
-        var note = createNoteInstance()
-        var scale = Scale()
-        var randomFrequency = getRandomFrequency(selectedScale)
-        assignFrequencyAndDuration(note, randomFrequency)
-        notes.add(note)
-    }
-
-    private fun clearOutPreviouslyGeneratedMelody(generatedList: TextView) {
-        if (generatedList.text != "") {
-            _displayNotes.value = listOf()
-            notes = mutableListOf()
+    private fun checkIfScaleIsNull(scale: Scale) {
+        if (_scalePickedLive.value == null) {
+            _scalePickedLive.value = scale.listOfScales[0].toString()
         }
     }
 
@@ -117,29 +127,11 @@ class HomeViewModel(
         }
     }
 
-    private fun checkIfScaleIsNull(scale: Scale) {
-        if (_scalePickedLive.value == null) {
-            _scalePickedLive.value = scale.listOfScales[0].toString()
+    private fun clearOutPreviouslyGeneratedMelody(generatedList: TextView) {
+        if (generatedList.text != "") {
+            _displayNotes.value = listOf()
+            notes = mutableListOf()
         }
-    }
-
-    private fun createMelodyList(selectedScale: List<Double>) {
-        if (selectedScale.isNullOrEmpty()) {
-            val defaultScale = listOf(246.9417, 261.6256, 277.1826, 293.6648, 329.6276, 349.2282, 369.9944, 391.9954, 415.3047, 440.0000, 466.1638, 493.8833, 523.2511)
-            for (n1 in 1.._countPickedLive.value!!) {
-                addNoteToMelodyList(defaultScale)
-            }
-        } else {
-            // Create a note with a frequency value and add it to the melody note list
-            for (n1 in 1.._countPickedLive.value!!) {
-                // Generate a PerfectTune, select a random frequency from scale, and add to list of notes
-                addNoteToMelodyList(selectedScale)
-            }
-        }
-    }
-
-    private fun updateMelodyTextViewDisplay() {
-        _displayNotes.value = notes
     }
 
     fun generateMelody(generatedList: TextView) {
@@ -148,18 +140,52 @@ class HomeViewModel(
         var scale = Scale()
         checkIfScaleIsNull(scale)
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
-        createMelodyList(selectedScale)
+
+        val finishedMelody = generateMelodyBasedOnSelectedMood()
+
         updateMelodyTextViewDisplay()
     }
 
 
     /**
+     * Play melody audio
+     */
+    // TODO: What does this do?
+    fun startCoolDown(note: Note, seconds: Int) {
+        object: CountDownTimer(seconds*1000.toLong(), seconds*1000.toLong()) {
+            override fun onTick(millisUntilFinished: Long) {}
+            override fun onFinish() {
+                note.toneObject.stopTune()
+            }
+        }.start()
+    }
+
+    // Start melody playback
+    fun playMelody() {
+        val melodyLength = countPickedLive.value
+        var index = 0
+        object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                // function to assign and play frequency note
+                Log.i("note", "playMelody - note frequency = ${notes[index].frequency}")
+                notes[index].assignFrequency()
+                notes[index].playFreq()
+                startCoolDown(notes[index],1)
+                index += 1
+            }
+            override fun onFinish() {
+                return
+            }
+        }.start()
+    }
+
+
+    // ==========================================================================================
+
+
+    /**
      * MOOD/PATTERN
      */
-    // TODO: replace
-//    val chosenMood = listOf(listOf<Double>())
-    var lastUsedIndex = 0
-
     // Ascend(1,2,3,4)
     private fun ascend(melody: MutableList<Double>): List<Double> {
         var scale = Scale()
@@ -475,62 +501,10 @@ class HomeViewModel(
             }
         }
     }
-    fun generateMelodyBasedOnSelectedMood(): List<Double> {
-        var melody = mutableListOf<Double>()
-
-        val rocky = listOf<List<Double>>(ascend(melody),descend(melody))
-        val dangerous = listOf<List<Double>>(fibonacci(melody), pi(melody), heartbeat(melody))
-        val lullaby = listOf<List<Double>>(waltz(melody))
-        val soaring = listOf<List<Double>>(ascend(melody), ascendTriad(melody), descend(melody),
-            descendTriad(melody), deku(melody), pyramid(melody), steps(melody))
-        val rainyDay = listOf<List<Double>>(skip(melody))
-
-        val listOfMoods = mapOf("rocky" to rocky, "dangerous" to dangerous, "lullaby" to lullaby,
-            "soaring" to soaring, "rainyDay" to rainyDay)
-
-        var chosenMood = rocky
-        for ((key, value) in listOfMoods) {
-            if (key == moodPickedLive.value) {
-                chosenMood = value
-            }
-        }
-
-        checkMelodyLength(melody, chosenMood)
-        return melody
-    }
 
 
-    /**
-     * Play melody audio
-     */
-    // TODO: What does this do?
-    fun startCoolDown(note: Note, seconds: Int) {
-        object: CountDownTimer(seconds*1000.toLong(), seconds*1000.toLong()) {
-            override fun onTick(millisUntilFinished: Long) {}
-            override fun onFinish() {
-                note.toneObject.stopTune()
-            }
-        }.start()
-    }
 
-    // Start melody playback
-    fun playMelody() {
-        val melodyLength = countPickedLive.value
-        var index = 0
-        object: CountDownTimer((melodyLength!!.times(1000)).toLong(), 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                // function to assign and play frequency note
-                Log.i("note", "playMelody - note frequency = ${notes[index].frequency}")
-                notes[index].assignFrequency()
-                notes[index].playFreq()
-                startCoolDown(notes[index],1)
-                index += 1
-            }
-            override fun onFinish() {
-                return
-            }
-        }.start()
-    }
+    // __________________________________________________________________________________________
 
 
     /**

@@ -11,7 +11,7 @@ class Patterns {
     // Chosen Mood
     val chosenMood = listOf(listOf<Double>())
 
-    var lastUsedIndex = selectedScale.size / 2
+    var lastUsedIndex = 0
 
 
     /**

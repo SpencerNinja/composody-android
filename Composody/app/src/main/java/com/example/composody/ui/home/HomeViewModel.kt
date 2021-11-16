@@ -94,6 +94,7 @@ class HomeViewModel(
         note.duration = randomDuration
     }
 
+    // TODO: update
     private fun addNoteToMelodyList(selectedScale: List<Double>) {
         var note = createNoteInstance()
         var scale = Scale()

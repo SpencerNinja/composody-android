@@ -105,7 +105,7 @@ class HomeViewModel(
         val rainyDay = listOf<List<Double>>(skip(melody))
         val listOfMoods = mapOf("rocky" to rocky, "dangerous" to dangerous, "lullaby" to lullaby,
             "soaring" to soaring, "rainyDay" to rainyDay)
-        var chosenMood = rocky
+        var chosenMood = listOf<List<Double>>()
         for ((key, value) in listOfMoods) {
             if (key == moodPickedLive.value) {
                 chosenMood = value
@@ -139,7 +139,16 @@ class HomeViewModel(
         checkIfMelodyLengthIsNull()
         var scale = Scale()
         checkIfScaleIsNull(scale)
+        for ((key, value) in listOfMoods) {
+            if (key == moodPickedLive.value) {
+                chosenMood = value
+            }
+        }
+
+        var totalNotes = countPickedLive.value
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
+        var chosenMood = moodPickedLive.value
+        var melody = mutableListOf<Double>()
 
         val finishedMelody = generateMelodyBasedOnSelectedMood()
 

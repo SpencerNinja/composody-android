@@ -70,24 +70,22 @@ class HomeViewModel(
      */
 
     // Create an empty list to later store notes
-    var notes = mutableListOf<Note>()
+//    var notes = mutableListOf<Note>()
+
     // Live Data for generate melody to display
     private val _displayNotes = MutableLiveData<List<Note>>()
     val displayNotes: LiveData<List<Note>>
         get() = _displayNotes
 
-
+    // Placeholder for finished melody
+    var melody = mutableListOf<Note>()
 
     // Last used index of note
     var lastUsedIndex = 0
 
-    // Placeholder for finished melody
-    var melody = mutableListOf<Note>()
-
-
 
     private fun updateMelodyTextViewDisplay() {
-        _displayNotes.value = notes
+        _displayNotes.value = melody
     }
 
     private fun checkIfMoodIsNull() {
@@ -111,12 +109,12 @@ class HomeViewModel(
     private fun clearOutPreviouslyGeneratedMelody(generatedList: TextView) {
         if (generatedList.text != "") {
             _displayNotes.value = listOf()
-            notes = mutableListOf()
+            melody = mutableListOf()
         }
     }
 
     // Pattern: ascend(1,2,3,4)
-    private fun ascend() {
+    private fun ascend(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -125,6 +123,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "ascend() -> selectedScale = $selectedScale")
         lastUsedIndex = selectedScale.size / 2
         val stretchOfNotes = (2..4).random()
         var count = 0
@@ -143,7 +142,7 @@ class HomeViewModel(
         }
     }
     // Pattern: descend(4,3,2,1)
-    private fun descend() {
+    private fun descend(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -152,6 +151,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "descend() -> selectedScale = $selectedScale")
         val stretchOfNotes = (2..4).random()
         var count = 0
         var frequency = 0.0
@@ -160,8 +160,6 @@ class HomeViewModel(
         while (count < stretchOfNotes) {
             val newIndex = lastUsedIndex - 1
             lastUsedIndex = newIndex
-            Log.i("note", "selectedScale[newIndex] = ${selectedScale[newIndex]}")
-            Log.i("note", "selectedScale[newIndex] = $frequency")
             frequency = selectedScale[newIndex]
             playableNote.frequency = frequency
             val randomDuration = Random.nextInt(500, 2000)
@@ -172,7 +170,7 @@ class HomeViewModel(
     }
     // 3. 141 592 653 589 793 238 462 643 3
     // Pattern: pi (3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6)
-    private fun pi() {
+    private fun pi(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -181,6 +179,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "pi() -> selectedScale = $selectedScale")
         val stretchOfNotes = (2..21).random()
         var count = 0
         var frequency: Double
@@ -201,7 +200,7 @@ class HomeViewModel(
         }
     }
     // Pattern: fibonacci (0,1,1,2,3,5,8)
-    private fun fibonacci() {
+    private fun fibonacci(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -210,6 +209,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "fibonacci() -> selectedScale = $selectedScale")
         val stretchOfNotes = (2..6).random()
         var count = 0
         var frequency: Double
@@ -230,7 +230,7 @@ class HomeViewModel(
         }
     }
     // Pattern: heartbeat (2,3,1,7,0,2,4,2)
-    private fun heartbeat() {
+    private fun heartbeat(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -239,6 +239,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "heartbeat() -> selectedScale = $selectedScale")
         val stretchOfNotes = (2..8).random()
         var count = 0
         var frequency: Double
@@ -259,7 +260,7 @@ class HomeViewModel(
         }
     }
     // Pattern: waltz (2,3,3,1,2,2)
-    private fun waltz() {
+    private fun waltz(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -268,13 +269,14 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "waltz() -> selectedScale = $selectedScale")
         val stretchOfNotes = (2..12).random()
         var count = 0
         var frequency: Double
         val playableNote = Note()
         playableNote.toneObject = PerfectTune()
-        var newIndex: Int
-        while (count < stretchOfNotes) {
+        var newIndex = 0
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             if (count % 2 == 0) {
                 newIndex = lastUsedIndex + 0
             } else {
@@ -294,7 +296,7 @@ class HomeViewModel(
         }
     }
     // Pattern:  triad ascend (1,2,3)
-    private fun ascendTriad() {
+    private fun ascendTriad(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -303,13 +305,14 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "ascendTriad() -> selectedScale = $selectedScale")
         val stretchOfNotes = (3..6).random()
         var count = 0
         var frequency: Double
         val playableNote = Note()
         playableNote.toneObject = PerfectTune()
-        var newIndex: Int
-        while (count < stretchOfNotes) {
+        var newIndex = 0
+        while (count < stretchOfNotes && newIndex > selectedScale.size) {
             if (count % 3 == 0) {
                 newIndex = lastUsedIndex + 0
                 lastUsedIndex = newIndex
@@ -334,7 +337,7 @@ class HomeViewModel(
         }
     }
     // Pattern: triad descend (3,2,1)
-    private fun descendTriad() {
+    private fun descendTriad(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -343,6 +346,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "descendTriad() -> selectedScale = $selectedScale")
         val stretchOfNotes = (3..6).random()
         var count = 0
         var frequency: Double
@@ -372,7 +376,7 @@ class HomeViewModel(
         }
     }
     // Pattern: pyramid (1,3,2)
-    private fun pyramid() {
+    private fun pyramid(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -381,6 +385,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "pyramid() -> selectedScale = $selectedScale")
         val stretchOfNotes = (3..6).random()
         var frequency: Double
         var count = 0
@@ -410,7 +415,7 @@ class HomeViewModel(
         }
     }
     // Pattern: deku (2,3,1)
-    private fun deku() {
+    private fun deku(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -419,6 +424,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "deku() -> selectedScale = $selectedScale")
         val stretchOfNotes = (3..6).random()
         var frequency: Double
         var count = 0
@@ -448,7 +454,7 @@ class HomeViewModel(
         }
     }
     // Pattern: steps (1,1,2,2,3,3)
-    private fun steps() {
+    private fun steps(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -457,6 +463,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "steps() -> selectedScale = $selectedScale")
         val stretchOfNotes = (2..12).random()
         var frequency: Double
         var count = 0
@@ -483,7 +490,7 @@ class HomeViewModel(
         }
     }
     // Pattern: skip (1,1,2,2,1,1,2,2)
-    private fun skip() {
+    private fun skip(melody: MutableList<Note>) {
         val scale = Scale()
         var selectedScale = scale.returnSelectedScale(_scalePickedLive.value!!)
         if (selectedScale.isNullOrEmpty()) {
@@ -492,6 +499,7 @@ class HomeViewModel(
                 415.3047, 440.0000, 466.1638, 493.8833, 523.2511
             )
         }
+        Log.i("note", "skip() -> selectedScale = $selectedScale")
         val stretchOfNotes = (2..12).random()
         var frequency: Double
         var count = 0
@@ -518,7 +526,7 @@ class HomeViewModel(
     }
 
 
-    fun generateMelody(generatedList: TextView) {
+    fun generateMelody(generatedList: TextView): MutableList<Note> {
         // Clear previous generated melody if it exists
         clearOutPreviouslyGeneratedMelody(generatedList)
 
@@ -540,26 +548,27 @@ class HomeViewModel(
 
         // Map/Dictionary of Moods
         val listOfMoods = mapOf(
-            "rocky" to rocky,
-            "dangerous" to dangerous,
-            "lullaby" to lullaby,
-            "soaring" to soaring,
-            "rainyDay" to rainyDay
+            "Rocky" to rocky,
+            "Dangerous" to dangerous,
+            "Lullaby" to lullaby,
+            "Soaring" to soaring,
+            "Rainy Day" to rainyDay
         )
 
         // Map of patterns
         val listOfPatterns = mapOf(
-            "ascend" to ascend(),
-            "ascendTriad" to ascendTriad(),
-            "descend" to descend(),
-            "descendTriad" to descendTriad(),
-            "deku" to deku(),
-            "fibonacci" to fibonacci(),
-            "heartbeat" to heartbeat(),
-            "pi" to pi(),
-            "pyramid" to pyramid(),
-            "skip" to skip(),
-            "steps" to steps(), "waltz" to waltz()
+            "ascend" to ascend(melody),
+            "ascendTriad" to ascendTriad(melody),
+            "descend" to descend(melody),
+            "descendTriad" to descendTriad(melody),
+            "deku" to deku(melody),
+            "fibonacci" to fibonacci(melody),
+            "heartbeat" to heartbeat(melody),
+            "pi" to pi(melody),
+            "pyramid" to pyramid(melody),
+            "skip" to skip(melody),
+            "steps" to steps(melody),
+            "waltz" to waltz(melody)
         )
 
         // Assign mood picked (string) to mood listing patterns (list of Strings)
@@ -571,28 +580,35 @@ class HomeViewModel(
             }
         }
 
+        // Empty Melody list
+        melody = mutableListOf<Note>()
+
         // Check length of generated melody
         while (melody.size < countPickedLive.value!!) {
             // choose a random pattern from selected mood
             val selectedPattern = chosenMood.random()
-            Log.i("note", "inside generateMelody - selectedPattern name = $selectedPattern")
+            Log.i("note", "inside generateMelody() - selectedPattern name = $selectedPattern")
             // find pattern function related to selected pattern
             for ((key, value) in listOfPatterns) {
                 if (key == selectedPattern) {
                     value   // pattern function
-                    Log.i("note", "generateMelody -> if reached - selectedPattern name = $key")
-                    Log.i("note", "generateMelody -> if reached - selectedPattern function = $value")
+                    Log.i("note", "inside generateMelody() -> if reached - selectedPattern name = $key")
+                    Log.i("note", "inside generateMelody() -> if reached - selectedPattern function = $value")
+                    Log.i("note", "inside generateMelody() -> if reached - melody is now = $melody")
                 }
             }
         }
         // If melody is longer than total notes selected, remove extra of notes
         if (melody.size > countPickedLive.value!!) {
             val howMuchOverTotalNotes = melody.size - countPickedLive.value!!
-            while (howMuchOverTotalNotes > 0) {
+            while (howMuchOverTotalNotes > 0 && melody.size > 0) {
+                Log.i("note", "inside generateMelody() -> removed from melody = ${melody.last()}")
                 melody.removeLast()
+                Log.i("note", "inside generateMelody() -> updated melody = $melody")
             }
         }
         updateMelodyTextViewDisplay()
+        return melody
     }
 
 

@@ -79,7 +79,7 @@
 
             <NumberPicker
                 android:id="@+id/number_picker"
-                android:layout_width="110dp"
+                android:layout_width="125dp"
                 android:layout_height="190dp"
                 android:background="#00FFFFFF" />
         </androidx.cardview.widget.CardView>
@@ -97,7 +97,7 @@
 
             <NumberPicker
                 android:id="@+id/scale_picker"
-                android:layout_width="110dp"
+                android:layout_width="125dp"
                 android:layout_height="190dp"
                 android:background="#00FFFFFF" />
 
@@ -116,7 +116,7 @@
 
             <NumberPicker
                 android:id="@+id/pattern_picker"
-                android:layout_width="110dp"
+                android:layout_width="125dp"
                 android:layout_height="190dp"
                 android:background="#00FFFFFF" />
         </androidx.cardview.widget.CardView>

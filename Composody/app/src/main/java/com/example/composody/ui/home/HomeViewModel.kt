@@ -121,12 +121,15 @@ class HomeViewModel(
         val stretchOfNotes = (2..4).random()
         var count = 0
         var frequency: Double
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        var newIndex = 0
+        if ((lastUsedIndex < 2) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
-            val newIndex = lastUsedIndex + 1
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
+            newIndex = lastUsedIndex + 1
             lastUsedIndex = newIndex
+            Log.i("note", "ascend() -> lastUsedIndex = $lastUsedIndex")
+            Log.i("note", "ascend() -> newIndex = $newIndex")
             frequency = selectedScale[newIndex]
             val playableNote = Note()
             playableNote.toneObject = PerfectTune()
@@ -145,11 +148,12 @@ class HomeViewModel(
         val stretchOfNotes = (2..4).random()
         var count = 0
         var frequency = 0.0
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
-            val newIndex = lastUsedIndex - 1
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
+            newIndex = lastUsedIndex - 1
             lastUsedIndex = newIndex
             frequency = selectedScale[newIndex]
             val playableNote = Note()
@@ -171,12 +175,13 @@ class HomeViewModel(
         var count = 0
         var frequency: Double
         val piValue = listOf(3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6)
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             for (index in piValue) {
-                val newIndex = piValue[index]
+                newIndex = piValue[index]
                 lastUsedIndex = newIndex
                 frequency = selectedScale[newIndex]
                 val playableNote = Note()
@@ -196,12 +201,13 @@ class HomeViewModel(
         var count = 0
         var frequency: Double
         val fibonacciValue = listOf(0,1,1,2,3,5)
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             for (index in fibonacciValue) {
-                val newIndex = fibonacciValue[index]
+                newIndex = fibonacciValue[index]
                 lastUsedIndex = newIndex
                 frequency = selectedScale[newIndex]
                 val playableNote = Note()
@@ -221,12 +227,13 @@ class HomeViewModel(
         var count = 0
         var frequency: Double
         val heartbeatValue = listOf(2,3,1,7,0,2,4,2)
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             for (index in heartbeatValue) {
-                val newIndex = heartbeatValue[index]
+                newIndex = heartbeatValue[index]
                 lastUsedIndex = newIndex
                 frequency = selectedScale[newIndex]
                 val playableNote = Note()
@@ -312,11 +319,11 @@ class HomeViewModel(
         val stretchOfNotes = (3..6).random()
         var count = 0
         var frequency: Double
-        var newIndex: Int
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             if (count % 3 == 0) {
                 newIndex = lastUsedIndex + 0
                 lastUsedIndex = newIndex
@@ -346,11 +353,11 @@ class HomeViewModel(
         val stretchOfNotes = (3..6).random()
         var frequency: Double
         var count = 0
-        var newIndex: Int
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             if (count % 3 == 0) {
                 newIndex = lastUsedIndex + 0
                 lastUsedIndex = newIndex
@@ -380,11 +387,11 @@ class HomeViewModel(
         val stretchOfNotes = (3..6).random()
         var frequency: Double
         var count = 0
-        var newIndex: Int
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             if (count % 3 == 0) {
                 newIndex = lastUsedIndex + 1
                 lastUsedIndex = newIndex
@@ -414,11 +421,11 @@ class HomeViewModel(
         val stretchOfNotes = (2..12).random()
         var frequency: Double
         var count = 0
-        var newIndex = lastUsedIndex
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             if (count % 3 == 0) {
                 newIndex = lastUsedIndex + 0
             } else if (count % 3 == 1) {
@@ -445,11 +452,11 @@ class HomeViewModel(
         val stretchOfNotes = (2..12).random()
         var frequency: Double
         var count = 0
-        var newIndex = lastUsedIndex
+        var newIndex = 0
         if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
             lastUsedIndex = selectedScale.size / 2
         }
-        while (count < stretchOfNotes) {
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             if (count % 3 == 0) {
                 newIndex = lastUsedIndex + 0
             } else if (count % 3 == 1) {
@@ -485,7 +492,8 @@ class HomeViewModel(
         var chosenMood = listOf<String>()
 
         // Moods defined
-        val rocky = listOf("ascend","descend")
+        val rocky = listOf("ascend")
+//        val rocky = listOf("ascend","descend")
         val dangerous = listOf("fibonacci", "pi", "heartbeat")
         val lullaby = listOf("waltz")
         val soaring = listOf("ascend", "ascendTriad", "descend", "descendTriad", "deku", "pyramid", "steps")

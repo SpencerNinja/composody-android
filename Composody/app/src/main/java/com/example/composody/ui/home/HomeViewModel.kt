@@ -196,7 +196,7 @@ class HomeViewModel(
     }
     // Pattern: fibonacci (0,1,1,2,3,5,8)
     fun fibonacci(melody: MutableList<Note>, selectedScale: List<Double>) {
-        Log.i("note", "fibonacci() -> selectedScale = $selectedScale")
+        Log.i("note", "fibonacci() - selectedScale = $selectedScale")
         val stretchOfNotes = (3..6).random()
         var count = 0
         var frequency: Double
@@ -205,11 +205,13 @@ class HomeViewModel(
         if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
+        Log.i("note", "fibonacci() - stretchOfNotes = $stretchOfNotes")
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             for (index in fibonacciValue) {
                 newIndex = fibonacciValue[index]
                 lastUsedIndex = newIndex
                 frequency = selectedScale[newIndex]
+                Log.i("note", "fibonacci - frequency = $frequency")
                 val playableNote = Note()
                 playableNote.toneObject = PerfectTune()
                 playableNote.frequency = frequency
@@ -219,6 +221,7 @@ class HomeViewModel(
                 count += 1
             }
         }
+        Log.i("note", "fibonacci() - melody = $melody")
     }
     // Pattern: heartbeat (2,3,1,7,0,2,4,2)
     fun heartbeat(melody: MutableList<Note>, selectedScale: List<Double>) {

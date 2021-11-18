@@ -125,6 +125,7 @@ class HomeFragment : Fragment() {
         root.findViewById<Button>(R.id.button_generate_melody).setOnClickListener {
             // Create the melody
             homeViewModel.generateMelody(binding.generatedList)
+            Log.i("note", "inside ClickListener - Generate button clicked")
         }
 
 

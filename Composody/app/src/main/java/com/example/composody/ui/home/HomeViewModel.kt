@@ -149,7 +149,7 @@ class HomeViewModel(
         var count = 0
         var frequency = 0.0
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -176,7 +176,7 @@ class HomeViewModel(
         var frequency: Double
         val piValue = listOf(3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6)
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -197,12 +197,12 @@ class HomeViewModel(
     // Pattern: fibonacci (0,1,1,2,3,5,8)
     fun fibonacci(melody: MutableList<Note>, selectedScale: List<Double>) {
         Log.i("note", "fibonacci() -> selectedScale = $selectedScale")
-        val stretchOfNotes = (2..6).random()
+        val stretchOfNotes = (3..6).random()
         var count = 0
         var frequency: Double
         val fibonacciValue = listOf(0,1,1,2,3,5)
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -228,7 +228,7 @@ class HomeViewModel(
         var frequency: Double
         val heartbeatValue = listOf(2,3,1,7,0,2,4,2)
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -253,7 +253,7 @@ class HomeViewModel(
         var count = 0
         var frequency: Double
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -284,7 +284,7 @@ class HomeViewModel(
         var count = 0
         var frequency: Double
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while (count < stretchOfNotes && newIndex > selectedScale.size) {
@@ -320,7 +320,7 @@ class HomeViewModel(
         var count = 0
         var frequency: Double
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -354,7 +354,7 @@ class HomeViewModel(
         var frequency: Double
         var count = 0
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -388,7 +388,7 @@ class HomeViewModel(
         var frequency: Double
         var count = 0
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -422,7 +422,7 @@ class HomeViewModel(
         var frequency: Double
         var count = 0
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -453,7 +453,7 @@ class HomeViewModel(
         var frequency: Double
         var count = 0
         var newIndex = 0
-        if (lastUsedIndex < 2 || lastUsedIndex > selectedScale.size - 2) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
@@ -492,7 +492,7 @@ class HomeViewModel(
         var chosenMood = listOf<String>()
 
         // Moods defined
-        val rocky = listOf("ascend")
+        val rocky = listOf("fibonacci")
 //        val rocky = listOf("ascend","descend")
         val dangerous = listOf("fibonacci", "pi", "heartbeat")
         val lullaby = listOf("waltz")

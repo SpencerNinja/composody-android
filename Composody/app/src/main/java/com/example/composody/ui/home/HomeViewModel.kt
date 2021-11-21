@@ -394,7 +394,7 @@ class HomeViewModel(
     // Pattern: skip (1,1,2,2,1,1,2,2)
     fun skip(melody: MutableList<Note>, selectedScale: List<Double>) {
         Log.i("note", "skip() -> selectedScale = $selectedScale")
-        val stretchOfNotes = (2..12).random()
+        val stretchOfNotes = (2..8).random()
         var frequency: Double
         var count = 0
         var newIndex = 0
@@ -424,20 +424,20 @@ class HomeViewModel(
     // Pattern: steps (1,1,2,2,3,3)
     fun steps(melody: MutableList<Note>, selectedScale: List<Double>) {
         Log.i("note", "steps() -> selectedScale = $selectedScale")
-        val stretchOfNotes = (2..12).random()
+        val stretchOfNotes = (2..6).random()
         var frequency: Double
         var count = 0
         var newIndex = 0
-        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
-            lastUsedIndex = selectedScale.size / 2
+        if ((lastUsedIndex < 2) || (lastUsedIndex > selectedScale.size - 6)) {
+            lastUsedIndex = (selectedScale.size / 2) - 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
-            if (count % 3 == 0) {
+            if (count % 3 == 0 || count % 3 == 1) {
                 newIndex = lastUsedIndex + 0
-            } else if (count % 3 == 1) {
+            } else if (count % 3 == 2) {
                 newIndex = lastUsedIndex + 1
             }
-            if (count % 3 == 2) {
+            if (count % 3 == 3) {
                 val jump = listOf(-2,-1,1,2).random()
                 newIndex = lastUsedIndex + jump
             }
@@ -455,12 +455,12 @@ class HomeViewModel(
     // Pattern: waltz (2,3,3,1,2,2)
     fun waltz(melody: MutableList<Note>, selectedScale: List<Double>) {
         Log.i("note", "waltz() -> selectedScale = $selectedScale")
-        val stretchOfNotes = (2..12).random()
+        val stretchOfNotes = (2..6).random()
         var count = 0
         var frequency: Double
         var newIndex = 0
-        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
-            lastUsedIndex = selectedScale.size / 2
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 6)) {
+            lastUsedIndex = (selectedScale.size / 2) - 2
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
             if (count % 2 == 0) {
@@ -469,7 +469,7 @@ class HomeViewModel(
                 newIndex = lastUsedIndex + 1
             }
             if (count % 3 == 0) {
-                val jump = listOf(-3,-2,-1,0,1,2,3).random()
+                val jump = listOf(-2,-1,0,1,2).random()
                 newIndex = lastUsedIndex + jump
             }
             lastUsedIndex = newIndex
@@ -499,12 +499,11 @@ class HomeViewModel(
         var chosenMood = listOf<String>()
 
         // Moods defined
-        val rocky = listOf("ascendTriad")
-//        val rocky = listOf("ascend","descend")
+        val rocky = listOf("ascend","descend")
         val dangerous = listOf("fibonacci", "pi", "heartbeat")
-        val lullaby = listOf("waltz")
+        val lullaby = listOf("step, waltz")
         val soaring = listOf("ascend", "ascendTriad", "descend", "descendTriad", "deku", "pyramid", "steps")
-        val rainyDay = listOf("skip")
+        val rainyDay = listOf("skip, steps")
 
         // Map/Dictionary of Moods
         val listOfMoods = mapOf(

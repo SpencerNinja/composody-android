@@ -24,7 +24,7 @@ class AboutFragment : Fragment() {
             val zoomAmount = 15.0F
 
             val target = LatLng(37.098531, -113.5916404)
-            val targetWindow = LatLng(37.048, -113.5916404)
+            val targetWindow = LatLng(37.048, -113.594)
             googleMap.addMarker(target.let { MarkerOptions().position(it).title(target.toString()) })
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(targetWindow))
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoomAmount))

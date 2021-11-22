@@ -499,11 +499,11 @@ class HomeViewModel(
         var chosenMood = listOf<String>()
 
         // Moods defined
-        val rocky = listOf("ascend","descend")
+        val rocky = listOf("ascend", "descend")
         val dangerous = listOf("fibonacci", "pi", "heartbeat")
-        val lullaby = listOf("step, waltz")
+        val lullaby = listOf("steps", "waltz")
         val soaring = listOf("ascend", "ascendTriad", "descend", "descendTriad", "deku", "pyramid", "steps")
-        val rainyDay = listOf("skip, steps")
+        val rainyDay = listOf("skip", "steps")
 
         // Map/Dictionary of Moods
         val listOfMoods = mapOf(

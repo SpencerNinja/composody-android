@@ -12,7 +12,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:background="@color/gold"
         app:cardBackgroundColor="@color/dark_overlay"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp">
 
             <TextView
                 android:id="@+id/faq_question"

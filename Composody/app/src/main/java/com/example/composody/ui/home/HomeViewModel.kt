@@ -149,7 +149,7 @@ class HomeViewModel(
         var count = 0
         var frequency: Double
         var newIndex = 0
-        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 6)) {
             lastUsedIndex = (selectedScale.size / 2) - 1
         }
         while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {

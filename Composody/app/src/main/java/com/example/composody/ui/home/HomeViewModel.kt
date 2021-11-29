@@ -309,7 +309,7 @@ class HomeViewModel(
         val stretchOfNotes = (2..8).random()
         var count = 0
         var frequency: Double
-        val heartbeatValue = listOf(2,3,1,7,0,2,4,2)
+        val heartbeatValue = listOf(2,3,1,5,0,2,4,2)
         var newIndex = 0
         if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 5)) {
             lastUsedIndex = selectedScale.size / 2

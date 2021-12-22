@@ -53,7 +53,7 @@ class HomeViewModel(
      * Mood/Pattern scroll wheel
      */
     // Data to load into mood/pattern scroll wheel
-    var moodBank = listOf("Rocky", "Dangerous", "Soaring", "Rainy Day", "Lullaby")
+    var moodBank = listOf("Rocky", "Dangerous", "Soaring", "Rainy Day", "Lullaby", "Surprise")
 
     // Mood Live Data
     private val _moodPickedLive = MutableLiveData<String>()
@@ -483,6 +483,34 @@ class HomeViewModel(
             count += 1
         }
     }
+    // Pattern: random +-random(0...3)
+    fun randomJump(melody: MutableList<Note>, selectedScale: List<Double>) {
+        Log.i("note", "random() -> selectedScale = $selectedScale")
+        val stretchOfNotes = (2..6).random()
+        var count = 0
+        var frequency: Double
+        var newIndex = 0
+        if ((lastUsedIndex < 4) || (lastUsedIndex > selectedScale.size - 4)) {
+            lastUsedIndex = (selectedScale.size / 2)
+        }
+        while ((count < stretchOfNotes) && (newIndex < selectedScale.size)) {
+            val randomInt = (-3..3).random()
+            if (lastUsedIndex + randomInt < 0 || lastUsedIndex + randomInt > selectedScale.size - 1) {
+                lastUsedIndex = (selectedScale.size / 2)
+            } else {
+                newIndex = lastUsedIndex + randomInt
+            }
+            lastUsedIndex = newIndex
+            frequency = selectedScale[newIndex]
+            val playableNote = Note()
+            playableNote.toneObject = PerfectTune()
+            playableNote.frequency = frequency
+            val randomDuration = Random.nextInt(500, 2000)
+            playableNote.duration = randomDuration
+            melody.add(playableNote)
+            count += 1
+        }
+    }
 
 
     fun generateMelody(generatedList: TextView): MutableList<Note> {
@@ -504,6 +532,7 @@ class HomeViewModel(
         val lullaby = listOf("steps", "waltz")
         val soaring = listOf("ascend", "ascendTriad", "descend", "descendTriad", "deku", "pyramid", "steps")
         val rainyDay = listOf("skip", "steps")
+        val surprise = listOf("randomJump")
 
         // Map/Dictionary of Moods
         val listOfMoods = mapOf(
@@ -511,7 +540,8 @@ class HomeViewModel(
             "Dangerous" to dangerous,
             "Lullaby" to lullaby,
             "Soaring" to soaring,
-            "Rainy Day" to rainyDay
+            "Rainy Day" to rainyDay,
+            "Surprise" to surprise
         )
 
         // Assign mood picked (string) to mood listing patterns (list of Strings)
@@ -555,6 +585,7 @@ class HomeViewModel(
                 "skip" -> skip(melody, selectedScale)
                 "steps" -> steps(melody, selectedScale)
                 "waltz" -> waltz(melody, selectedScale)
+                "randomJump" -> randomJump(melody,selectedScale)
             }
             Log.i("note", "inside generateMelody() -> if reached - melody is now = $melody")
         }

@@ -69,10 +69,6 @@ class HomeViewModel(
     /**
      * Generate a Melody
      */
-
-    // Create an empty list to later store notes
-//    var notes = mutableListOf<Note>()
-
     // Live Data for generate melody to display
     private val _displayNotes = MutableLiveData<List<Note>>()
     val displayNotes: LiveData<List<Note>>
@@ -83,7 +79,6 @@ class HomeViewModel(
 
     // Last used index of note
     var lastUsedIndex = 0
-
 
     private fun updateMelodyTextViewDisplay() {
         _displayNotes.value = melody
@@ -511,7 +506,6 @@ class HomeViewModel(
             count += 1
         }
     }
-
 
     fun generateMelody(generatedList: TextView): MutableList<Note> {
         // Clear previous generated melody if it exists

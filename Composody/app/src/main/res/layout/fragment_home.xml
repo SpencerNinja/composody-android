@@ -100,7 +100,6 @@
                 android:layout_width="125dp"
                 android:layout_height="190dp"
                 android:background="#00FFFFFF" />
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
